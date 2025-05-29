@@ -6,7 +6,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SendIcon from '@mui/icons-material/Send';
 import PersonIcon from '@mui/icons-material/Person';
 import MessageIcon from '@mui/icons-material/Message';
@@ -63,7 +62,7 @@ const Footer = () => {
     };
 
     // Duplication du contenu pour une animation continue
-    const scrollingContent = "Scrat • Designer • Developer • DevOps • Alain Patrick";
+    const scrollingContent = "Scrat • Designer • Developer • DevOps • Alain Patrick • ";
     const repeatedContent = scrollingContent.repeat(10);
 
     // Structure de données pour les médias sociaux avec icônes Material
@@ -83,7 +82,7 @@ const Footer = () => {
                 <div className="inline-block">
                     {repeatedContent.split('•').map((text, index) => (
                         <span key={index} className="inline-flex items-center">
-                            <span className="text-[#DAA520] text-3xl md:text-4xl font-medium px-6">{text.trim()}</span>
+                            <span className="text-[#DAA520] text-6xl md:text-7xl font-black px-6">{text.trim()}</span>
                             <span className="inline-flex items-center justify-center px-3">
                                 {/* Utilisation du logo importé ici */}
                                 <img src={logo} alt="Logo" className="h-12 w-12 md:h-16 md:w-16 object-contain" />
@@ -229,15 +228,6 @@ const Footer = () => {
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#1B1B1B] rounded-full p-1 shadow-lg shadow-[#DAA520]/20">
                         {/* Logo utilisé comme point central du séparateur */}
                         <img src={logo} alt="Logo" className="w-full h-full object-contain" />
-                    </div>
-                </div>
-
-                {/* Copyright et informations légales améliorées */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6 py-6 bg-[#1B1B1B]/30 rounded-2xl px-6">
-                    <div className="flex flex-col md:flex-row items-center gap-4">
-                        <p className="text-[#FFFFFF]/50 text-sm">
-                            &copy; {currentYear} Scrat1313. All rights reserved.
-                        </p>
                     </div>
                 </div>
             </div>
