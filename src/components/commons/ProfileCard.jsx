@@ -141,6 +141,10 @@ const ProfileCard = ({ data, className = '' }) => {
                                 );
                             })}
                         </div>
+                        {/* Donwload Resum */}
+                        <button className='bg-[#FFD700] text-black px-4 py-2 rounded-full hover:bg-[#DAA520] transition-all'>
+                            Download Resume
+                        </button>
                     </div>
                 </div>
 
