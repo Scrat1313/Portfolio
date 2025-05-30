@@ -212,15 +212,6 @@ const Hero = () => {
                                     & AI
                                 </h1>
                             </RevealOnScroll>
-
-                            {/* Badges de compétences accent pour mobile */}
-                            {isMobile && (
-                                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 flex gap-1">
-                                    <span className="w-1 h-1 rounded-full bg-[#DAA520]/70"></span>
-                                    <span className="w-1 h-1 rounded-full bg-white/70"></span>
-                                    <span className="w-1 h-1 rounded-full bg-[#8B5CF6]/70"></span>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
