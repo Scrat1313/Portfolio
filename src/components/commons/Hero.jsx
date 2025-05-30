@@ -29,7 +29,7 @@ const Hero = () => {
 
     return (
         <section className={`relative w-full overflow-hidden bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a]
-                           ${isMobile ? 'min-h-[70dvh] pt-12 pb-16' : 'min-h-[90dvh] pt-20 pb-6 sm:pt-24 md:pt-16 lg:py-12'}`}>
+                           ${isMobile ? 'min-h-[20dvh] pt-16 pb-12' : 'min-h-[90dvh] pt-20 pb-6 sm:pt-24 md:pt-16 lg:py-12'}`}>
             {/* Background statique moderne avec effets de flou */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 {/* Grille fine */}
@@ -72,28 +72,7 @@ const Hero = () => {
                               bg-white/5 backdrop-blur-sm 
                               border-t border-l border-white/10 opacity-30
                               ${isMobile ? 'top-[5%] right-[3%] w-[120px] h-[120px]' : 'top-[10%] right-[5%] w-[200px] h-[200px]'}`}></div>
-
-                {/* Code binaire flottant pour la section Developer */}
-                <div className="absolute top-[15%] left-[5%] text-[#DAA520]/5 font-mono text-xs sm:text-sm md:text-base opacity-70 hidden sm:block">
-                    <div>01000100</div>
-                    <div>01100101</div>
-                    <div>01110110</div>
-                    <div>00111010</div>
-                    <div>01010111</div>
-                    <div>01100101</div>
-                    <div>01100010</div>
-                </div>
-
-                {/* Commandes terminal pour la section DevOps */}
-                <div className="absolute top-[20%] right-[8%] text-white/5 font-mono text-xs sm:text-sm md:text-base opacity-70 text-right hidden sm:block">
-                    <div>kubectl deploy</div>
-                    <div>docker-compose</div>
-                    <div>git push</div>
-                    <div>aws ecs</div>
-                    <div>terraform</div>
-                    <div>ci/cd</div>
-                </div>
-
+                              
                 {/* Réseau neuronal stylisé pour la section AI */}
                 <div className="absolute bottom-[15%] left-[40%] text-[#8B5CF6]/5 opacity-50 hidden sm:block">
                     <svg width="120" height="80" viewBox="0 0 120 80">
@@ -158,10 +137,10 @@ const Hero = () => {
 
             {/* Main content container with responsive padding */}
             <div className={`container mx-auto relative z-10 h-full flex flex-col justify-center 
-                           ${isMobile ? 'px-3 py-3' : 'px-4'}`}>
+                           ${isMobile ? 'px-3 py-2' : 'px-4'}`}>
 
                 {/* Description sur la gauche - visible uniquement sur écrans moyens et grands */}
-                <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-3/4 transform -translate-y-1/2 max-w-[180px] lg:max-w-[220px] xl:max-w-[250px]">
+                <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-1/2 transform -translate-y-1/2 max-w-[180px] lg:max-w-[220px] xl:max-w-[250px]">
                     <p className="text-white/80 text-sm lg:text-base font-light leading-relaxed">
                         <span className="text-[#DAA520] font-medium">Passionate</span> about web development,
                         DevOps infrastructure and artificial intelligence, I create
@@ -175,7 +154,7 @@ const Hero = () => {
                 <div className="w-full max-w-[1920px] mx-auto">
                     {/* Ajustement vertical responsive pour mobile */}
                     <div className={`flex flex-col w-full 
-                                  ${isMobile ? 'space-y-0.5' : 'space-y-2 sm:space-y-0 sm:space-y-[-10px] md:space-y-[-12px] lg:space-y-[-16px] xl:space-y-[-20px] 2xl:space-y-[-24px]'}`}>
+                                  ${isMobile ? 'space-y-0' : 'space-y-2 sm:space-y-0 sm:space-y-[-10px] md:space-y-[-12px] lg:space-y-[-16px] xl:space-y-[-20px] 2xl:space-y-[-24px]'}`}>
                         {/* Ligne 1: Developer à gauche */}
                         <div className="text-center sm:text-left sm:pl-3 md:pl-20 lg:pl-28 xl:pl-36 relative">
                             {/* Élément décoratif */}
@@ -187,7 +166,7 @@ const Hero = () => {
                             <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
                                          text-transparent bg-clip-text bg-gradient-to-br from-[#DAA520] to-[#FFD700]
                                          tracking-tight sm:tracking-[-0.02em] transform-gpu
-                                         ${isMobile ? 'text-[36px] xs:text-[42px]' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
+                                         ${isMobile ? 'text-[32px] xs:text-[36px] mt-4' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                 Developer
                             </h1>
                         </div>
@@ -200,7 +179,7 @@ const Hero = () => {
                             <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
                                          text-transparent bg-clip-text bg-gradient-to-r from-white/90 to-white/60
                                          tracking-tight sm:tracking-[-0.02em] transform-gpu
-                                         ${isMobile ? 'text-[36px] xs:text-[42px]' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
+                                         ${isMobile ? 'text-[32px] xs:text-[36px] mt-1' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                 DevOps
                             </h1>
                         </div>
@@ -213,7 +192,7 @@ const Hero = () => {
                             <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
                                          text-transparent bg-clip-text bg-gradient-to-br from-[#8B5CF6] to-[#A78BFA]
                                          tracking-tight sm:tracking-[-0.02em] transform-gpu
-                                         ${isMobile ? 'text-[36px] xs:text-[42px]' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
+                                         ${isMobile ? 'text-[32px] xs:text-[36px] mt-1' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                 & AI
                             </h1>
 
@@ -229,17 +208,17 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* ProfileCard pour mobile - placé après le texte */}
+                {/* ProfileCard pour mobile - placé après le texte avec taille réduite */}
                 {isMobile && (
-                    <div className="mt-3 relative flex justify-center items-center">
-                        <ProfileCard data={cardData} className="transform-none static mx-auto scale-80" />
+                    <div className="mt-2 relative flex justify-center items-center">
+                        <ProfileCard data={cardData} className="transform-none static mx-auto scale-75" />
                     </div>
                 )}
 
-                {/* Description pour mobile - placée après le ProfileCard */}
+                {/* Description pour mobile - placée sous le titre Developer */}
                 {isMobile && (
-                    <div className="mt-10 text-center px-4">
-                        <p className="text-white/70 text-xs leading-tight">
+                    <div className="mt-10 text-center px-3">
+                        <p className="text-white/70 text-[10px] xs:text-xs leading-tight">
                             <span className="text-[#DAA520]">Passionate</span> about web development, DevOps and AI, creating
                             <span className="text-[#8B5CF6]"> innovative</span> solutions for the modern web.
                         </p>

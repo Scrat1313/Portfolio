@@ -9,13 +9,45 @@
     background-size: 50px 50px;
 }
 
+.bg-grid-pattern-sm {
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
 .bg-dot-pattern {
     background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 30px 30px;
 }
 
+.bg-dot-pattern-sm {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
 .bg-radial-vignette {
     background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 10, 0.6) 80%, rgba(10, 10, 10, 0.8) 100%);
+}
+
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(2px, -2px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(0, 3px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translate(-2px, 1px) rotate(0deg);
+    }
 }
 
 /* Animations Profile Card */
