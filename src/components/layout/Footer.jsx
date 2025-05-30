@@ -96,12 +96,6 @@ const Footer = () => {
                     {/* Logo et info - Amélioré */}
                     <div className="flex flex-col items-start lg:col-span-1">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="h-14 w-14 rounded-xl bg-gradient-to-br from-[#DAA520] to-[#8B5CF6] p-0.5">
-                                <div className="h-full w-full rounded-xl bg-[#1B1B1B] flex items-center justify-center">
-                                    {/* Utilisation du logo importé pour la section info */}
-                                    <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
-                                </div>
-                            </div>
                             <div>
                                 <h2 className="text-2xl font-bold text-[#DAA520] tracking-tight">
                                     {username}<span className="text-[#8B5CF6]">.</span>
