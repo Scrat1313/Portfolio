@@ -26,6 +26,26 @@ const Skills = () => {
     const [hoveredItem, setHoveredItem] = useState(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const containerRef = useRef(null);
+    const contentRefs = useRef({});
+
+    // Animations d'ouverture et fermeture plus fluides
+    useEffect(() => {
+        // Pour chaque section, initialiser la hauteur CSS
+        Object.keys(expandedSections).forEach(section => {
+            if (contentRefs.current[section]) {
+                const content = contentRefs.current[section];
+                if (expandedSections[section]) {
+                    // Si expanded, définir la hauteur à la hauteur réelle du contenu
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.style.opacity = "1";
+                } else {
+                    // Si fermé, définir la hauteur à 0
+                    content.style.maxHeight = "0";
+                    content.style.opacity = "0";
+                }
+            }
+        });
+    }, [expandedSections]);
 
     // Suivi de la position de la souris
     const handleMouseMove = (e) => {
@@ -80,7 +100,6 @@ const Skills = () => {
             </div>
         );
     };
-
 
     return (
         <section
@@ -151,40 +170,43 @@ const Skills = () => {
                                         <h3 className="text-xl font-bold text-white">Programming Languages</h3>
                                     </div>
                                     <ExpandMoreIcon
-                                        className={`text-white/60 transition-transform duration-300 ${expandedSections.programming_languages ? 'rotate-180' : ''}`}
+                                        className={`text-white/60 transition-transform duration-500 ${expandedSections.programming_languages ? 'rotate-180' : ''}`}
                                     />
                                 </div>
 
-                                {expandedSections.programming_languages && (
+                                <div
+                                    ref={ref => contentRefs.current['programming_languages'] = ref}
+                                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                                    style={{ maxHeight: 0, opacity: 0 }}
+                                >
                                     <div className="p-2 divide-y divide-[#5B21B6]/10">
                                         {skillsData.programming_languages.map((lang, index) => (
-                                            <RevealOnScroll key={lang.name} delay={250 + index * 50} direction="left">
-                                                <div
-                                                    className="flex flex-wrap md:flex-nowrap items-center py-3 px-4 gap-4 hover:bg-[#1B1B1B]/40 rounded-lg transition-colors duration-300 cursor-default"
-                                                    onMouseEnter={() => setHoveredItem(lang.name)}
-                                                    onMouseLeave={() => setHoveredItem(null)}
-                                                >
-                                                    <div className="flex items-center gap-3 w-full md:w-1/4">
-                                                        <h4 className="font-semibold text-white text-lg">{lang.name}</h4>
-                                                    </div>
-
-                                                    <div className={`px-2 py-1 text-xs font-medium rounded-md border ${getLevelClasses(lang.level)} w-full md:w-auto flex items-center gap-2`}>
-                                                        {getLevelIndicator(lang.level)}
-                                                        <span>{lang.level}</span>
-                                                    </div>
-
-                                                    <p className="text-white/70 text-sm w-full md:w-2/3">
-                                                        {lang.description}
-                                                    </p>
-
-                                                    {hoveredItem === lang.name && (
-                                                        <CheckIcon className="text-[#DAA520] ml-auto hidden md:block" fontSize="small" />
-                                                    )}
+                                            <div
+                                                key={lang.name}
+                                                className="flex flex-wrap md:flex-nowrap items-center py-3 px-4 gap-4 hover:bg-[#1B1B1B]/40 rounded-lg transition-colors duration-300 cursor-default"
+                                                onMouseEnter={() => setHoveredItem(lang.name)}
+                                                onMouseLeave={() => setHoveredItem(null)}
+                                            >
+                                                <div className="flex items-center gap-3 w-full md:w-1/4">
+                                                    <h4 className="font-semibold text-white text-lg">{lang.name}</h4>
                                                 </div>
-                                            </RevealOnScroll>
+
+                                                <div className={`px-2 py-1 text-xs font-medium rounded-md border ${getLevelClasses(lang.level)} w-full md:w-auto flex items-center gap-2`}>
+                                                    {getLevelIndicator(lang.level)}
+                                                    <span>{lang.level}</span>
+                                                </div>
+
+                                                <p className="text-white/70 text-sm w-full md:w-2/3">
+                                                    {lang.description}
+                                                </p>
+
+                                                {hoveredItem === lang.name && (
+                                                    <CheckIcon className="text-[#DAA520] ml-auto hidden md:block" fontSize="small" />
+                                                )}
+                                            </div>
                                         ))}
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </RevealOnScroll>
                     </div>
@@ -204,34 +226,37 @@ const Skills = () => {
                                         <h3 className="text-xl font-bold text-white">Databases</h3>
                                     </div>
                                     <ExpandMoreIcon
-                                        className={`text-white/60 transition-transform duration-300 ${expandedSections.databases ? 'rotate-180' : ''}`}
+                                        className={`text-white/60 transition-transform duration-500 ${expandedSections.databases ? 'rotate-180' : ''}`}
                                     />
                                 </div>
 
-                                {expandedSections.databases && (
+                                <div
+                                    ref={ref => contentRefs.current['databases'] = ref}
+                                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                                    style={{ maxHeight: 0, opacity: 0 }}
+                                >
                                     <div className="p-4 space-y-4">
                                         {skillsData.databases.map((db, index) => (
-                                            <RevealOnScroll key={db.name} delay={300 + index * 70} direction="right">
-                                                <div
-                                                    className="p-3 hover:bg-[#1B1B1B]/40 rounded-lg transition-colors duration-300 border-l-2 border-transparent hover:border-[#8B5CF6] cursor-default"
-                                                    onMouseEnter={() => setHoveredItem(db.name)}
-                                                    onMouseLeave={() => setHoveredItem(null)}
-                                                >
-                                                    <h4 className="font-bold text-white flex items-center gap-2 mb-2">
-                                                        <ArrowForwardIosIcon style={{ fontSize: '0.7rem' }} className="text-[#8B5CF6]" />
-                                                        {db.name}
-                                                        {hoveredItem === db.name && (
-                                                            <AutoAwesomeIcon className="text-[#8B5CF6] ml-auto" fontSize="small" />
-                                                        )}
-                                                    </h4>
-                                                    <p className="text-white/60 text-sm">
-                                                        {db.description}
-                                                    </p>
-                                                </div>
-                                            </RevealOnScroll>
+                                            <div
+                                                key={db.name}
+                                                className="p-3 hover:bg-[#1B1B1B]/40 rounded-lg transition-colors duration-300 border-l-2 border-transparent hover:border-[#8B5CF6] cursor-default"
+                                                onMouseEnter={() => setHoveredItem(db.name)}
+                                                onMouseLeave={() => setHoveredItem(null)}
+                                            >
+                                                <h4 className="font-bold text-white flex items-center gap-2 mb-2">
+                                                    <ArrowForwardIosIcon style={{ fontSize: '0.7rem' }} className="text-[#8B5CF6]" />
+                                                    {db.name}
+                                                    {hoveredItem === db.name && (
+                                                        <AutoAwesomeIcon className="text-[#8B5CF6] ml-auto" fontSize="small" />
+                                                    )}
+                                                </h4>
+                                                <p className="text-white/60 text-sm">
+                                                    {db.description}
+                                                </p>
+                                            </div>
                                         ))}
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </RevealOnScroll>
                     </div>
@@ -251,21 +276,23 @@ const Skills = () => {
                                         <h3 className="text-xl font-bold text-white">Frameworks</h3>
                                     </div>
                                     <ExpandMoreIcon
-                                        className={`text-white/60 transition-transform duration-300 ${expandedSections.frameworks_and_libraries ? 'rotate-180' : ''}`}
+                                        className={`text-white/60 transition-transform duration-500 ${expandedSections.frameworks_and_libraries ? 'rotate-180' : ''}`}
                                     />
                                 </div>
 
-                                {expandedSections.frameworks_and_libraries && (
+                                <div
+                                    ref={ref => contentRefs.current['frameworks_and_libraries'] = ref}
+                                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                                    style={{ maxHeight: 0, opacity: 0 }}
+                                >
                                     <div className="p-4">
                                         <div className="mb-6">
                                             <h4 className="text-[#DAA520] font-semibold mb-3 text-sm uppercase tracking-wider">Frontend</h4>
                                             <div className="flex flex-wrap gap-2">
-                                                {skillsData.frameworks_and_libraries.frontend.map((fw, index) => (
-                                                    <RevealOnScroll key={fw} delay={350 + index * 40} direction="bottom">
-                                                        <span className="px-3 py-1.5 rounded-full bg-[#DAA520]/10 border border-[#DAA520]/20 text-white/80 text-xs font-medium hover:bg-[#DAA520]/20 transition-colors duration-300 cursor-default">
-                                                            {fw}
-                                                        </span>
-                                                    </RevealOnScroll>
+                                                {skillsData.frameworks_and_libraries.frontend.map((fw) => (
+                                                    <span key={fw} className="px-3 py-1.5 rounded-full bg-[#DAA520]/10 border border-[#DAA520]/20 text-white/80 text-xs font-medium hover:bg-[#DAA520]/20 transition-colors duration-300 cursor-default">
+                                                        {fw}
+                                                    </span>
                                                 ))}
                                             </div>
                                         </div>
@@ -273,17 +300,15 @@ const Skills = () => {
                                         <div>
                                             <h4 className="text-[#8B5CF6] font-semibold mb-3 text-sm uppercase tracking-wider">Backend</h4>
                                             <div className="flex flex-wrap gap-2">
-                                                {skillsData.frameworks_and_libraries.backend.map((fw, index) => (
-                                                    <RevealOnScroll key={fw} delay={400 + index * 30} direction="bottom">
-                                                        <span className="px-3 py-1.5 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-white/80 text-xs font-medium hover:bg-[#8B5CF6]/20 transition-colors duration-300 cursor-default">
-                                                            {fw}
-                                                        </span>
-                                                    </RevealOnScroll>
+                                                {skillsData.frameworks_and_libraries.backend.map((fw) => (
+                                                    <span key={fw} className="px-3 py-1.5 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 text-white/80 text-xs font-medium hover:bg-[#8B5CF6]/20 transition-colors duration-300 cursor-default">
+                                                        {fw}
+                                                    </span>
                                                 ))}
                                             </div>
                                         </div>
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </RevealOnScroll>
                     </div>
@@ -303,35 +328,38 @@ const Skills = () => {
                                         <h3 className="text-xl font-bold text-white">DevOps & Infrastructure</h3>
                                     </div>
                                     <ExpandMoreIcon
-                                        className={`text-white/60 transition-transform duration-300 ${expandedSections.devops_and_servers ? 'rotate-180' : ''}`}
+                                        className={`text-white/60 transition-transform duration-500 ${expandedSections.devops_and_servers ? 'rotate-180' : ''}`}
                                     />
                                 </div>
 
-                                {expandedSections.devops_and_servers && (
+                                <div
+                                    ref={ref => contentRefs.current['devops_and_servers'] = ref}
+                                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                                    style={{ maxHeight: 0, opacity: 0 }}
+                                >
                                     <div className="p-4">
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                            {skillsData.devops_and_servers.tools.map((tool, index) => (
-                                                <RevealOnScroll key={tool.name} delay={400 + index * 60} direction="bottom">
-                                                    <div
-                                                        className="p-4 border border-[#5B21B6]/10 hover:border-[#DAA520]/30 rounded-lg bg-gradient-to-br from-transparent to-[#1B1B1B]/50 hover:from-[#DAA520]/5 transition-all duration-300 cursor-default"
-                                                        onMouseEnter={() => setHoveredItem(tool.name)}
-                                                        onMouseLeave={() => setHoveredItem(null)}
-                                                    >
-                                                        <div className="flex items-center justify-between mb-3">
-                                                            <h4 className="font-bold text-white">{tool.name}</h4>
-                                                            <span className="text-[#DAA520]">
-                                                                <BuildIcon fontSize="small" />
-                                                            </span>
-                                                        </div>
-                                                        <p className="text-white/60 text-sm">
-                                                            {tool.description}
-                                                        </p>
+                                            {skillsData.devops_and_servers.tools.map((tool) => (
+                                                <div
+                                                    key={tool.name}
+                                                    className="p-4 border border-[#5B21B6]/10 hover:border-[#DAA520]/30 rounded-lg bg-gradient-to-br from-transparent to-[#1B1B1B]/50 hover:from-[#DAA520]/5 transition-all duration-300 cursor-default"
+                                                    onMouseEnter={() => setHoveredItem(tool.name)}
+                                                    onMouseLeave={() => setHoveredItem(null)}
+                                                >
+                                                    <div className="flex items-center justify-between mb-3">
+                                                        <h4 className="font-bold text-white">{tool.name}</h4>
+                                                        <span className="text-[#DAA520]">
+                                                            <BuildIcon fontSize="small" />
+                                                        </span>
                                                     </div>
-                                                </RevealOnScroll>
+                                                    <p className="text-white/60 text-sm">
+                                                        {tool.description}
+                                                    </p>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </RevealOnScroll>
                     </div>
@@ -351,37 +379,40 @@ const Skills = () => {
                                         <h3 className="text-xl font-bold text-white">UI/UX Design</h3>
                                     </div>
                                     <ExpandMoreIcon
-                                        className={`text-white/60 transition-transform duration-300 ${expandedSections.design_and_ui ? 'rotate-180' : ''}`}
+                                        className={`text-white/60 transition-transform duration-500 ${expandedSections.design_and_ui ? 'rotate-180' : ''}`}
                                     />
                                 </div>
 
-                                {expandedSections.design_and_ui && (
+                                <div
+                                    ref={ref => contentRefs.current['design_and_ui'] = ref}
+                                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                                    style={{ maxHeight: 0, opacity: 0 }}
+                                >
                                     <div className="p-4">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            {skillsData.design_and_ui.map((design, index) => (
-                                                <RevealOnScroll key={design.skill} delay={500 + index * 70} direction="bottom">
-                                                    <div
-                                                        className="p-5 rounded-lg border border-transparent hover:border-[#8B5CF6]/50 hover:bg-gradient-to-br hover:from-[#8B5CF6]/5 hover:to-transparent transition-all duration-300 cursor-default"
-                                                        onMouseEnter={() => setHoveredItem(design.skill)}
-                                                        onMouseLeave={() => setHoveredItem(null)}
-                                                    >
-                                                        <div className="flex items-center gap-3 mb-3">
-                                                            <span className="text-[#8B5CF6] bg-[#8B5CF6]/10 p-2 rounded-lg">
-                                                                <DesignServicesIcon fontSize="small" />
-                                                            </span>
-                                                            <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#DAA520] to-[#8B5CF6]">
-                                                                {design.skill}
-                                                            </h4>
-                                                        </div>
-                                                        <p className="text-white/70 text-base leading-relaxed">
-                                                            {design.description}
-                                                        </p>
+                                            {skillsData.design_and_ui.map((design) => (
+                                                <div
+                                                    key={design.skill}
+                                                    className="p-5 rounded-lg border border-transparent hover:border-[#8B5CF6]/50 hover:bg-gradient-to-br hover:from-[#8B5CF6]/5 hover:to-transparent transition-all duration-300 cursor-default"
+                                                    onMouseEnter={() => setHoveredItem(design.skill)}
+                                                    onMouseLeave={() => setHoveredItem(null)}
+                                                >
+                                                    <div className="flex items-center gap-3 mb-3">
+                                                        <span className="text-[#8B5CF6] bg-[#8B5CF6]/10 p-2 rounded-lg">
+                                                            <DesignServicesIcon fontSize="small" />
+                                                        </span>
+                                                        <h4 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#DAA520] to-[#8B5CF6]">
+                                                            {design.skill}
+                                                        </h4>
                                                     </div>
-                                                </RevealOnScroll>
+                                                    <p className="text-white/70 text-base leading-relaxed">
+                                                        {design.description}
+                                                    </p>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
-                                )}
+                                </div>
                             </div>
                         </RevealOnScroll>
                     </div>
