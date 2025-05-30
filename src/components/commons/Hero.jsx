@@ -146,7 +146,7 @@ const Hero = () => {
 
                 {/* Description sur la gauche - visible uniquement sur écrans moyens et grands */}
                 <RevealOnScroll delay={600} direction="left">
-                    <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-[366px] max-w-[180px] lg:max-w-[220px] xl:max-w-[250px] z-1000">
+                    <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-[366px] max-w-[180px] lg:max-w-[220px] xl:max-w-[250px] z-10">
                         <p className="text-white/80 text-sm lg:text-base font-light leading-relaxed">
                             <span className="text-[#DAA520] font-medium">Passionate</span> about web development,
                             DevOps infrastructure and artificial intelligence, I create
@@ -167,11 +167,11 @@ const Hero = () => {
                             {/* Élément décoratif */}
                             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-12 bg-gradient-to-r from-[#DAA520]/30 to-transparent hidden sm:block"></div>
 
-                            {/* ProfileCard uniquement pour desktop */}
+                            {/* ProfileCard uniquement pour desktop - sans RevealOnScroll pour préserver l'interactivité */}
                             {!isMobile && (
-                                <RevealOnScroll delay={800} direction="top">
+                                <div className="animate-fade-in-top">
                                     <ProfileCard data={cardData} />
-                                </RevealOnScroll>
+                                </div>
                             )}
 
                             <RevealOnScroll delay={100} direction={isMobile ? "bottom" : "left"}>
