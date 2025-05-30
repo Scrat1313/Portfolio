@@ -107,5 +107,15 @@
             "skill": "Responsive Design",
             "description": "Creating layouts adaptable to all screen types using TailwindCSS."
         }
+    ],
+    "network_and_security": [
+        {
+            "tool": "Cisco Packet Tracer",
+            "description": "Used to simulate and configure network topologies and understand routing protocols."
+        },
+        {
+            "skill": "Cybersecurity",
+            "description": "Basic knowledge in securing applications and understanding of common threats and vulnerabilities."
+        }
     ]
 }

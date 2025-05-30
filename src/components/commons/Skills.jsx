@@ -12,6 +12,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import CheckIcon from '@mui/icons-material/Check';
+import SecurityIcon from '@mui/icons-material/Security';
+import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 
 const Skills = () => {
     // Toutes les sections sont masquées par défaut (false)
@@ -20,7 +22,8 @@ const Skills = () => {
         frameworks_and_libraries: false,
         databases: false,
         devops_and_servers: false,
-        design_and_ui: false
+        design_and_ui: false,
+        network_and_security: false // Ajout de la nouvelle section
     });
 
     const [hoveredItem, setHoveredItem] = useState(null);
@@ -364,8 +367,8 @@ const Skills = () => {
                         </RevealOnScroll>
                     </div>
 
-                    {/* Section UI/UX Design - Pleine largeur */}
-                    <div className="md:col-span-12 order-5">
+                    {/* Section UI/UX Design - Centrée sur l'ordre 6 */}
+                    <div className="md:col-span-8 order-5">
                         <RevealOnScroll delay={450} direction="bottom">
                             <div className="bg-[#1B1B1B]/30 backdrop-blur-lg rounded-xl border border-[#5B21B6]/20 overflow-hidden">
                                 <div
@@ -411,6 +414,61 @@ const Skills = () => {
                                                 </div>
                                             ))}
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </RevealOnScroll>
+                    </div>
+
+                    {/* NOUVELLE SECTION: Network & Security */}
+                    <div className="md:col-span-4 order-6">
+                        <RevealOnScroll delay={400} direction="right">
+                            <div className="bg-[#1B1B1B]/30 backdrop-blur-lg rounded-xl border border-[#5B21B6]/20 overflow-hidden h-full">
+                                <div
+                                    className="flex items-center justify-between p-4 cursor-pointer border-b border-[#5B21B6]/20 hover:bg-[#1B1B1B]/50 transition-colors duration-300"
+                                    onClick={() => toggleSection('network_and_security')}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <span className="p-2 rounded-full bg-[#8B5CF6]/10 text-[#8B5CF6]">
+                                            <SecurityIcon />
+                                        </span>
+                                        <h3 className="text-xl font-bold text-white">Network & Security</h3>
+                                    </div>
+                                    <ExpandMoreIcon
+                                        className={`text-white/60 transition-transform duration-500 ${expandedSections.network_and_security ? 'rotate-180' : ''}`}
+                                    />
+                                </div>
+
+                                <div
+                                    ref={ref => contentRefs.current['network_and_security'] = ref}
+                                    className="overflow-hidden transition-all duration-500 ease-in-out"
+                                    style={{ maxHeight: 0, opacity: 0 }}
+                                >
+                                    <div className="p-4 space-y-4">
+                                        {skillsData.network_and_security.map((item, index) => (
+                                            <div
+                                                key={item.tool || item.skill}
+                                                className="p-3 hover:bg-[#1B1B1B]/40 rounded-lg transition-colors duration-300 border-l-2 border-transparent hover:border-[#8B5CF6] cursor-default"
+                                                onMouseEnter={() => setHoveredItem(item.tool || item.skill)}
+                                                onMouseLeave={() => setHoveredItem(null)}
+                                            >
+                                                <h4 className="font-bold text-white flex items-center gap-2 mb-2">
+                                                    {item.tool && (
+                                                        <NetworkCheckIcon style={{ fontSize: '1rem' }} className="text-[#8B5CF6]" />
+                                                    )}
+                                                    {item.skill && (
+                                                        <SecurityIcon style={{ fontSize: '1rem' }} className="text-[#8B5CF6]" />
+                                                    )}
+                                                    {item.tool || item.skill}
+                                                    {hoveredItem === (item.tool || item.skill) && (
+                                                        <AutoAwesomeIcon className="text-[#8B5CF6] ml-auto" fontSize="small" />
+                                                    )}
+                                                </h4>
+                                                <p className="text-white/60 text-sm">
+                                                    {item.description}
+                                                </p>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
