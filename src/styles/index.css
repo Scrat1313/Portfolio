@@ -1,1 +1,151 @@
 @import "tailwindcss";
+
+.bg-grid-pattern {
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(5deg);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(5deg);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes card-expand {
+    0% {
+        transform: rotate(5deg) translateY(0);
+        backdrop-filter: blur(8px);
+    }
+
+    30% {
+        transform: rotate(0deg) translateY(-10px);
+        backdrop-filter: blur(10px);
+    }
+
+    60% {
+        transform: rotate(0deg) translateY(-5px);
+        backdrop-filter: blur(12px);
+    }
+
+    100% {
+        transform: rotate(0deg) translateY(0);
+        backdrop-filter: blur(15px);
+    }
+}
+
+@keyframes card-collapse {
+    0% {
+        transform: rotate(0deg) translateY(0);
+        backdrop-filter: blur(15px);
+    }
+
+    40% {
+        transform: rotate(15deg) translateY(-5px);
+        backdrop-filter: blur(10px);
+    }
+
+    100% {
+        transform: rotate(5deg) translateY(0);
+        backdrop-filter: blur(8px);
+    }
+}
+
+.animate-expand {
+    animation: card-expand 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-collapse {
+    animation: card-collapse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes content-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    60% {
+        opacity: 0.8;
+        transform: translateY(-5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-content-fade-in {
+    animation: content-fade-in 0.5s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes photo-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 12px rgba(218, 165, 32, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+    }
+}
+
+.animate-photo-glow {
+    animation: photo-glow 3s ease-in-out infinite;
+}
+
+@keyframes badge-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-badge-appear {
+    animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.staggered-animation>* {
+    opacity: 0;
+}
+
+.staggered-animation>*:nth-child(1) {
+    animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.1s;
+}
+
+.staggered-animation>*:nth-child(2) {
+    animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.2s;
+}
+
+.staggered-animation>*:nth-child(3) {
+    animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.3s;
+}
+
+.staggered-animation>*:nth-child(4) {
+    animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.4s;
+}
+
+.staggered-animation>*:nth-child(5) {
+    animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.5s;
+}

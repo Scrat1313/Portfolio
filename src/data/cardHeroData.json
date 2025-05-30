@@ -1,0 +1,31 @@
+{
+    "profile": {
+        "firstName": "Alain Patrick",
+        "lastName": "RAMAHEFARSON",
+        "title": "Developer & DevOps"
+    },
+    "skills": [
+        "Designer",
+        "Developer",
+        "DevOps",
+        "CyberSecurity",
+        "AI"
+    ],
+    "links": [
+        {
+            "type": "github",
+            "url": "https://github.com/Scrat1313",
+            "icon": "GitHubIcon"
+        },
+        {
+            "type": "email",
+            "url": "mailto:patrickramahefarson08022002@gmail.com",
+            "icon": "EmailIcon"
+        },
+        {
+            "type": "whatsapp",
+            "url": "https://wa.me/+261345682040",
+            "icon": "WhatsAppIcon"
+        }
+    ]
+}

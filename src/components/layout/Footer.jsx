@@ -12,7 +12,6 @@ import MessageIcon from '@mui/icons-material/Message';
 
 const Footer = () => {
     const scrollingTextRef = useRef(null);
-    const currentYear = new Date().getFullYear();
     const username = "Scrat";
 
     // État pour le formulaire de contact
@@ -62,7 +61,7 @@ const Footer = () => {
     };
 
     // Duplication du contenu pour une animation continue
-    const scrollingContent = "Scrat • Designer • Developer • DevOps • Alain Patrick • ";
+    const scrollingContent = "Scrat • Designer • A.I. • Developer • DevOps • Alain Patrick • ";
     const repeatedContent = scrollingContent.repeat(10);
 
     // Structure de données pour les médias sociaux avec icônes Material
