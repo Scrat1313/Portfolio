@@ -53,37 +53,55 @@ const ProfileCard = ({ data, className = '' }) => {
                 z-10 flex flex-col items-center justify-center
                 ${className}`}
         >
+            {/* Cercle décoratif discret en haut à gauche */}
+            <div className="absolute -top-1 -left-1 w-3 h-3 rounded-full bg-gradient-to-br from-[#DAA520]/40 to-[#FFD700]/20"></div>
+
+            {/* Cercle décoratif discret en bas à droite */}
+            <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-gradient-to-tl from-[#DAA520]/40 to-[#FFD700]/20"></div>
+
             <div className="flex flex-col items-center justify-center p-3 w-full">
-                {/* Photo de profil avec halo lumineux */}
-                <div className={`relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full overflow-hidden mb-2
-                       animate-photo-glow
+                {/* Photo de profil avec halo lumineux et cadre amélioré */}
+                <div className={`relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full mb-2
+                       animate-photo-glow group
                        transition-transform duration-500
                        ${isCardExpanded ? 'scale-110' : ''}`}
                 >
-                    <img
-                        src={Profile}
-                        alt={data.profile.firstName}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24'%3E%3Cpath fill='%23DAA520' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E";
-                        }}
-                    />
-                    <div className="absolute inset-0 border border-white/10 rounded-full"></div>
+                    {/* Halo autour de la photo */}
+                    <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#DAA520]/20 via-[#FFD700]/5 to-[#DAA520]/20 blur-sm"></div>
+
+                    {/* Container avec double bordure */}
+                    <div className="relative rounded-full overflow-hidden z-10 border border-white/10 p-[1px] bg-gradient-to-br from-[#DAA520]/30 to-transparent">
+                        <img
+                            src={Profile}
+                            alt={data.profile.firstName}
+                            className="w-full h-full object-cover rounded-full"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24'%3E%3Cpath fill='%23DAA520' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E";
+                            }}
+                        />
+
+                        {/* Overlay subtilement brillant */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60"></div>
+                    </div>
                 </div>
 
-                {/* Nom avec espacement réduit */}
+                {/* Nom avec style amélioré */}
                 <div className="text-white font-bold text-xs sm:text-sm md:text-base text-center leading-tight">
-                    {data.profile.lastName}
-                    <span className="block text-white/80 text-[10px] sm:text-xs md:text-sm font-medium">
+                    <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+                        {data.profile.lastName}
+                    </span>
+                    <span className="block text-white/80 text-[10px] sm:text-xs md:text-sm font-medium tracking-wide">
                         {data.profile.firstName}
                     </span>
                 </div>
 
-                {/* Rôle/Skills avec pastille brillante */}
-                <div className="text-[#FFD700] text-[10px] sm:text-xs md:text-sm font-medium mt-1 flex items-center gap-1">
-                    <span className={`inline-block w-1.5 h-1.5 rounded-full bg-[#FFD700] ${isCardExpanded ? '' : 'animate-pulse'}`}></span>
-                    {isCardExpanded ? "Skills" : data.profile.title}
+                {/* Rôle/Skills avec pastille brillante et style amélioré */}
+                <div className="text-[#FFD700] bg-black/20 rounded-full px-2 py-0.5 text-[10px] sm:text-xs md:text-sm font-medium mt-1 flex items-center gap-1">
+                    <span className={`inline-block w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#DAA520] to-[#FFD700] ${isCardExpanded ? '' : 'animate-pulse'}`}></span>
+                    <span className="bg-gradient-to-r from-[#DAA520] to-[#FFD700] bg-clip-text text-transparent">
+                        {isCardExpanded ? "Skills" : data.profile.title}
+                    </span>
                 </div>
 
                 {/* Contenu supplémentaire qui apparaît lors du clic */}
@@ -96,14 +114,16 @@ const ProfileCard = ({ data, className = '' }) => {
                             {data.skills.map((skill, index) => (
                                 <span
                                     key={index}
-                                    className="px-2 py-0.5 bg-white/10 rounded-full transition-all hover:bg-white/20 hover:text-white hover:scale-105"
+                                    className="px-2 py-0.5 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm
+                                             border-t border-l border-white/10 border-r border-b border-white/5
+                                             rounded-full transition-all hover:bg-white/20 hover:text-white hover:scale-105"
                                 >
                                     {skill}
                                 </span>
                             ))}
                         </div>
 
-                        <div className="flex space-x-4 mt-3 justify-center pt-1 border-t border-white/10">
+                        <div className="flex space-x-4 mt-3 justify-center pt-2 border-t border-white/10">
                             {data.links.map((link, index) => {
                                 const IconComponent = getIconComponent(link.icon);
                                 return (
@@ -112,10 +132,11 @@ const ProfileCard = ({ data, className = '' }) => {
                                         href={link.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-white/80 hover:text-[#FFD700] transition-all hover:scale-125"
+                                        className="text-white/80 hover:text-[#FFD700] transition-all hover:scale-125 
+                                                 p-1.5 rounded-full bg-white/5 backdrop-blur-sm"
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        {IconComponent && <IconComponent className="w-4 h-4 md:w-5 md:h-5" />}
+                                        {IconComponent && <IconComponent className="w-3.5 h-3.5 md:w-4.5 md:h-4.5" />}
                                     </a>
                                 );
                             })}
@@ -123,13 +144,23 @@ const ProfileCard = ({ data, className = '' }) => {
                     </div>
                 </div>
 
-                {/* Icône pour indiquer que c'est cliquable avec effet lumineux */}
-                <div className={`text-white/30 mt-1 transition-transform duration-500 ease-bounce
-                       ${isCardExpanded ? 'rotate-180 text-[#FFD700]/50' : ''}`}
+                {/* Séparateur subtilement stylisé */}
+                <div className={`w-12 h-[1px] mx-auto my-1 
+                               bg-gradient-to-r from-transparent via-white/20 to-transparent
+                               ${isCardExpanded ? 'opacity-100' : 'opacity-50'}`}>
+                </div>
+
+                {/* Icône pour indiquer que c'est cliquable avec effet lumineux amélioré */}
+                <div className={`text-white/30 transition-transform duration-500 ease-bounce
+                               flex items-center justify-center w-5 h-5 rounded-full
+                               ${isCardExpanded ? 'rotate-180 text-[#FFD700]/70 bg-black/20' : 'bg-white/5'}`}
                 >
-                    <KeyboardArrowDownIcon className="h-4 w-4" />
+                    <KeyboardArrowDownIcon className="h-3.5 w-3.5" />
                 </div>
             </div>
+
+            {/* Réflexion subtile en bas de la carte */}
+            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
         </div>
     );
 };

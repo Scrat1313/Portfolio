@@ -13,7 +13,6 @@ const Header = () => {
 
     const navItems = [
         { name: 'Home', path: routes.home },
-        { name: 'About', path: routes.aboutMe },
         { name: 'Achievements', path: routes.achievements }
     ];
 

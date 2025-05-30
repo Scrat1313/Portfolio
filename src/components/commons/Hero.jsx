@@ -1,128 +1,248 @@
 import React, { useEffect, useState } from 'react';
 import { ProfileCard } from './';
 import cardData from '../../data/cardHeroData.json';
+import CodeIcon from '@mui/icons-material/Code';
+import StorageIcon from '@mui/icons-material/Storage';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import WebIcon from '@mui/icons-material/Web';
+import SecurityIcon from '@mui/icons-material/Security';
+import LayersIcon from '@mui/icons-material/Layers';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-    // Détecter si l'appareil est mobile
+    // Détecter si l'appareil est mobile ou petit écran
     useEffect(() => {
-        const checkIfMobile = () => {
+        const checkScreenSize = () => {
             setIsMobile(window.innerWidth < 640);
+            setIsSmallScreen(window.innerWidth < 768);
         };
 
-        checkIfMobile();
-        window.addEventListener('resize', checkIfMobile);
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
 
         return () => {
-            window.removeEventListener('resize', checkIfMobile);
+            window.removeEventListener('resize', checkScreenSize);
         };
     }, []);
 
     return (
-        <section className="relative min-h-[100dvh] w-full overflow-hidden bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a] pt-24 pb-6 sm:pt-28 md:pt-20 lg:py-16">
+        <section className={`relative w-full overflow-hidden bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a]
+                           ${isMobile ? 'min-h-[70dvh] pt-12 pb-16' : 'min-h-[90dvh] pt-20 pb-6 sm:pt-24 md:pt-16 lg:py-12'}`}>
             {/* Background statique moderne avec effets de flou */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 {/* Grille fine */}
                 <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
 
-                {/* Formes floues avec dégradés */}
-                <div className="absolute top-[-5%] right-[-10%] w-[40vw] h-[40vw] rounded-full 
+                {/* Formes floues avec dégradés - optimisées pour mobile */}
+                <div className={`absolute rounded-full 
                               bg-gradient-to-br from-[#DAA520]/5 to-[#FFD700]/10 
-                              blur-[60px] opacity-60"></div>
+                              blur-[60px] opacity-60
+                              ${isMobile ? 'top-[5%] right-[-15%] w-[60vw] h-[60vw]' : 'top-[-5%] right-[-10%] w-[40vw] h-[40vw]'}`}></div>
 
-                <div className="absolute top-[20%] left-[-15%] w-[50vw] h-[30vw] 
+                <div className={`absolute 
                               bg-gradient-to-tr from-white/5 to-white/10 
-                              rounded-[40%] blur-[80px] opacity-30"></div>
+                              rounded-[40%] blur-[80px] opacity-30
+                              ${isMobile ? 'top-[10%] left-[-25%] w-[70vw] h-[40vw]' : 'top-[20%] left-[-15%] w-[50vw] h-[30vw]'}`}></div>
 
-                <div className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[40vw] 
+                <div className={`absolute 
                               bg-gradient-to-tr from-[#8B5CF6]/5 to-[#A78BFA]/10 
-                              rounded-[30%] blur-[70px] opacity-50"></div>
+                              rounded-[30%] blur-[70px] opacity-50
+                              ${isMobile ? 'bottom-[-5%] left-[10%] w-[80vw] h-[50vw]' : 'bottom-[-10%] left-[20%] w-[60vw] h-[40vw]'}`}></div>
 
-                <div className="absolute top-[40%] right-[10%] w-[30vw] h-[30vw] 
-                              bg-gradient-to-bl from-[#0284c7]/5 to-[#7dd3fc]/10 
-                              rounded-full blur-[90px] opacity-40"></div>
+                {/* Lignes horizontales subtiles - réduites sur mobile */}
+                <div className={`absolute left-0 w-full h-[1px] 
+                              bg-gradient-to-r from-transparent via-[#DAA520]/15 to-transparent
+                              ${isMobile ? 'top-[25%]' : 'top-[30%]'}`}></div>
 
-                {/* Lignes horizontales subtiles */}
-                <div className="absolute top-[30%] left-0 w-full h-[1px] 
-                              bg-gradient-to-r from-transparent via-[#DAA520]/15 to-transparent"></div>
-
-                <div className="absolute top-[60%] left-0 w-full h-[1px] 
-                              bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
-
-                <div className="absolute top-[80%] left-0 w-full h-[1px] 
-                              bg-gradient-to-r from-transparent via-[#8B5CF6]/15 to-transparent"></div>
+                <div className={`absolute left-0 w-full h-[1px] 
+                              bg-gradient-to-r from-transparent via-white/15 to-transparent
+                              ${isMobile ? 'top-[55%]' : 'top-[60%]'}`}></div>
 
                 {/* Effet de vignette */}
                 <div className="absolute inset-0 bg-radial-vignette"></div>
 
-                {/* Motif subtil de points */}
-                <div className="absolute inset-0 bg-dot-pattern opacity-10"></div>
+                {/* Motif subtil de points - densité réduite sur mobile */}
+                <div className={`absolute inset-0 opacity-10 
+                              ${isMobile ? 'bg-dot-pattern-sm' : 'bg-dot-pattern'}`}></div>
 
-                {/* Effet glassmorphisme dans les coins */}
-                <div className="absolute top-[10%] right-[5%] w-[200px] h-[200px] 
-                              rounded-2xl rotate-[30deg]
+                {/* Effet glassmorphisme dans les coins - taille réduite sur mobile */}
+                <div className={`absolute rounded-2xl rotate-[30deg]
                               bg-white/5 backdrop-blur-sm 
-                              border-t border-l border-white/10
-                              opacity-30"></div>
+                              border-t border-l border-white/10 opacity-30
+                              ${isMobile ? 'top-[5%] right-[3%] w-[120px] h-[120px]' : 'top-[10%] right-[5%] w-[200px] h-[200px]'}`}></div>
 
-                <div className="absolute bottom-[15%] left-[5%] w-[150px] h-[150px] 
-                              rounded-2xl rotate-[-15deg]
-                              bg-white/5 backdrop-blur-sm 
-                              border-t border-l border-white/10
-                              opacity-30"></div>
+                {/* Code binaire flottant pour la section Developer */}
+                <div className="absolute top-[15%] left-[5%] text-[#DAA520]/5 font-mono text-xs sm:text-sm md:text-base opacity-70 hidden sm:block">
+                    <div>01000100</div>
+                    <div>01100101</div>
+                    <div>01110110</div>
+                    <div>00111010</div>
+                    <div>01010111</div>
+                    <div>01100101</div>
+                    <div>01100010</div>
+                </div>
+
+                {/* Commandes terminal pour la section DevOps */}
+                <div className="absolute top-[20%] right-[8%] text-white/5 font-mono text-xs sm:text-sm md:text-base opacity-70 text-right hidden sm:block">
+                    <div>kubectl deploy</div>
+                    <div>docker-compose</div>
+                    <div>git push</div>
+                    <div>aws ecs</div>
+                    <div>terraform</div>
+                    <div>ci/cd</div>
+                </div>
+
+                {/* Réseau neuronal stylisé pour la section AI */}
+                <div className="absolute bottom-[15%] left-[40%] text-[#8B5CF6]/5 opacity-50 hidden sm:block">
+                    <svg width="120" height="80" viewBox="0 0 120 80">
+                        <circle cx="20" cy="20" r="4" fill="#8B5CF6" opacity="0.2" />
+                        <circle cx="60" cy="10" r="4" fill="#8B5CF6" opacity="0.2" />
+                        <circle cx="100" cy="20" r="4" fill="#8B5CF6" opacity="0.2" />
+                        <circle cx="40" cy="40" r="4" fill="#8B5CF6" opacity="0.2" />
+                        <circle cx="80" cy="40" r="4" fill="#8B5CF6" opacity="0.2" />
+                        <circle cx="60" cy="70" r="4" fill="#8B5CF6" opacity="0.2" />
+
+                        <line x1="20" y1="20" x2="40" y2="40" stroke="#8B5CF6" opacity="0.1" strokeWidth="1" />
+                        <line x1="60" y1="10" x2="40" y2="40" stroke="#8B5CF6" opacity="0.1" strokeWidth="1" />
+                        <line x1="60" y1="10" x2="80" y2="40" stroke="#8B5CF6" opacity="0.1" strokeWidth="1" />
+                        <line x1="100" y1="20" x2="80" y2="40" stroke="#8B5CF6" opacity="0.1" strokeWidth="1" />
+                        <line x1="40" y1="40" x2="60" y2="70" stroke="#8B5CF6" opacity="0.1" strokeWidth="1" />
+                        <line x1="80" y1="40" x2="60" y2="70" stroke="#8B5CF6" opacity="0.1" strokeWidth="1" />
+                    </svg>
+                </div>
+            </div>
+
+            {/* Icônes de compétences flottantes */}
+            <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+                {/* Icônes de développement */}
+                <div className="absolute top-[18%] left-[15%] transform -rotate-12 opacity-10 text-[#DAA520] hidden sm:block">
+                    <CodeIcon sx={{ fontSize: '2rem' }} />
+                </div>
+                <div className="absolute top-[28%] left-[22%] transform rotate-6 opacity-8 text-[#DAA520] hidden sm:block">
+                    <WebIcon sx={{ fontSize: '1.7rem' }} />
+                </div>
+
+                {/* Icônes DevOps */}
+                <div className="absolute top-[35%] right-[20%] transform rotate-15 opacity-10 text-white hidden sm:block">
+                    <StorageIcon sx={{ fontSize: '2rem' }} />
+                </div>
+                <div className="absolute top-[45%] right-[15%] transform -rotate-10 opacity-8 text-white hidden sm:block">
+                    <SecurityIcon sx={{ fontSize: '1.7rem' }} />
+                </div>
+
+                {/* Icônes AI */}
+                <div className="absolute bottom-[25%] left-[45%] transform rotate-5 opacity-10 text-[#8B5CF6] hidden sm:block">
+                    <PsychologyIcon sx={{ fontSize: '2rem' }} />
+                </div>
+                <div className="absolute bottom-[35%] left-[55%] transform -rotate-5 opacity-8 text-[#8B5CF6] hidden sm:block">
+                    <LayersIcon sx={{ fontSize: '1.7rem' }} />
+                </div>
+            </div>
+
+            {/* Éléments décoratifs géométriques */}
+            <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+                {/* Zone Developer */}
+                <div className="absolute top-[10%] left-[10%] w-6 h-6 border-l-2 border-t-2 border-[#DAA520]/20 hidden sm:block"></div>
+                <div className="absolute top-[40%] left-[5%] w-2 h-16 bg-gradient-to-b from-[#DAA520]/10 to-transparent hidden sm:block"></div>
+
+                {/* Zone DevOps */}
+                <div className="absolute top-[15%] right-[10%] w-6 h-6 border-r-2 border-t-2 border-white/20 hidden sm:block"></div>
+                <div className="absolute top-[35%] right-[8%] w-12 h-2 bg-gradient-to-r from-transparent to-white/10 hidden sm:block"></div>
+
+                {/* Zone AI */}
+                <div className="absolute bottom-[20%] left-[38%] w-24 h-24 rounded-full border border-dashed border-[#8B5CF6]/15 hidden sm:block"></div>
+                <div className="absolute bottom-[15%] left-[60%] w-3 h-3 rounded-full bg-[#8B5CF6]/10 hidden sm:block"></div>
             </div>
 
             {/* Main content container with responsive padding */}
-            <div className="container mx-auto relative z-10 h-full flex flex-col justify-center px-4">
+            <div className={`container mx-auto relative z-10 h-full flex flex-col justify-center 
+                           ${isMobile ? 'px-3 py-3' : 'px-4'}`}>
+
+                {/* Description sur la gauche - visible uniquement sur écrans moyens et grands */}
+                <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-3/4 transform -translate-y-1/2 max-w-[180px] lg:max-w-[220px] xl:max-w-[250px]">
+                    <p className="text-white/80 text-sm lg:text-base font-light leading-relaxed">
+                        <span className="text-[#DAA520] font-medium">Passionate</span> about web development,
+                        DevOps infrastructure and artificial intelligence, I create
+                        <span className="text-[#8B5CF6]"> innovative</span> and <span className="text-white">scalable</span> solutions for the modern web.
+                    </p>
+                    {/* Ligne de connexion */}
+                    <div className="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 w-6 lg:w-8 xl:w-10 h-[1px] bg-gradient-to-r from-[#DAA520]/50 to-transparent"></div>
+                </div>
+
                 {/* Titre principal - container responsive */}
                 <div className="w-full max-w-[1920px] mx-auto">
                     {/* Ajustement vertical responsive pour mobile */}
-                    <div className="flex flex-col w-full space-y-4 sm:space-y-0 
-                                  sm:space-y-[-10px] md:space-y-[-15px] lg:space-y-[-20px] 
-                                  xl:space-y-[-25px] 2xl:space-y-[-30px]">
+                    <div className={`flex flex-col w-full 
+                                  ${isMobile ? 'space-y-0.5' : 'space-y-2 sm:space-y-0 sm:space-y-[-10px] md:space-y-[-12px] lg:space-y-[-16px] xl:space-y-[-20px] 2xl:space-y-[-24px]'}`}>
                         {/* Ligne 1: Developer à gauche */}
-                        <div className="text-center sm:text-left sm:pl-3 md:pl-4 lg:pl-6 relative">
+                        <div className="text-center sm:text-left sm:pl-3 md:pl-20 lg:pl-28 xl:pl-36 relative">
+                            {/* Élément décoratif */}
+                            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-12 bg-gradient-to-r from-[#DAA520]/30 to-transparent hidden sm:block"></div>
+
                             {/* ProfileCard uniquement pour desktop */}
                             {!isMobile && <ProfileCard data={cardData} />}
 
-                            <h1 className="text-[48px] xs:text-[55px] sm:text-[90px] md:text-[120px] 
-                                         lg:text-[160px] xl:text-[200px] 2xl:text-[240px] min-[1920px]:text-[280px]
-                                         font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
+                            <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
                                          text-transparent bg-clip-text bg-gradient-to-br from-[#DAA520] to-[#FFD700]
-                                         tracking-tight sm:tracking-[-0.02em] transform-gpu">
+                                         tracking-tight sm:tracking-[-0.02em] transform-gpu
+                                         ${isMobile ? 'text-[36px] xs:text-[42px]' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                 Developer
                             </h1>
                         </div>
 
                         {/* Ligne 2: DevOps à droite */}
-                        <div className="text-center sm:text-right sm:pr-3 md:pr-4 lg:pr-6">
-                            <h1 className="text-[48px] xs:text-[55px] sm:text-[90px] md:text-[120px] 
-                                         lg:text-[160px] xl:text-[200px] 2xl:text-[240px] min-[1920px]:text-[280px]
-                                         font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
+                        <div className="text-center sm:text-right sm:pr-3 md:pr-4 lg:pr-6 relative">
+                            {/* Élément décoratif */}
+                            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1 h-12 bg-gradient-to-l from-white/30 to-transparent hidden sm:block"></div>
+
+                            <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
                                          text-transparent bg-clip-text bg-gradient-to-r from-white/90 to-white/60
-                                         tracking-tight sm:tracking-[-0.02em] transform-gpu">
+                                         tracking-tight sm:tracking-[-0.02em] transform-gpu
+                                         ${isMobile ? 'text-[36px] xs:text-[42px]' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                 DevOps
                             </h1>
                         </div>
 
                         {/* Ligne 3: & AI au milieu */}
                         <div className="text-center relative">
-                            <h1 className="text-[48px] xs:text-[55px] sm:text-[90px] md:text-[120px] 
-                                         lg:text-[160px] xl:text-[200px] 2xl:text-[240px] min-[1920px]:text-[280px]
-                                         font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
+                            {/* Élément décoratif */}
+                            <div className="absolute left-1/2 top-0 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-[#8B5CF6]/30 to-transparent hidden sm:block"></div>
+
+                            <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
                                          text-transparent bg-clip-text bg-gradient-to-br from-[#8B5CF6] to-[#A78BFA]
-                                         tracking-tight sm:tracking-[-0.02em] transform-gpu">
+                                         tracking-tight sm:tracking-[-0.02em] transform-gpu
+                                         ${isMobile ? 'text-[36px] xs:text-[42px]' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                 & AI
                             </h1>
+
+                            {/* Badges de compétences accent pour mobile */}
+                            {isMobile && (
+                                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 flex gap-1">
+                                    <span className="w-1 h-1 rounded-full bg-[#DAA520]/70"></span>
+                                    <span className="w-1 h-1 rounded-full bg-white/70"></span>
+                                    <span className="w-1 h-1 rounded-full bg-[#8B5CF6]/70"></span>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
 
                 {/* ProfileCard pour mobile - placé après le texte */}
                 {isMobile && (
-                    <div className="mt-8 relative flex justify-center items-center">
-                        <ProfileCard data={cardData} className="transform-none static mx-auto" />
+                    <div className="mt-3 relative flex justify-center items-center">
+                        <ProfileCard data={cardData} className="transform-none static mx-auto scale-80" />
+                    </div>
+                )}
+
+                {/* Description pour mobile - placée après le ProfileCard */}
+                {isMobile && (
+                    <div className="mt-10 text-center px-4">
+                        <p className="text-white/70 text-xs leading-tight">
+                            <span className="text-[#DAA520]">Passionate</span> about web development, DevOps and AI, creating
+                            <span className="text-[#8B5CF6]"> innovative</span> solutions for the modern web.
+                        </p>
                     </div>
                 )}
             </div>
