@@ -29,7 +29,7 @@ const Hero = () => {
 
     return (
         <section className={`relative w-full overflow-hidden bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#0a0a0a]
-                           ${isMobile ? 'min-h-[60dvh] pt-16 pb-12' : 'min-h-[90dvh] pt-20 pb-6 sm:pt-24 md:pt-16 lg:py-12'}`}>
+                           ${isMobile ? 'min-h-[40dvh] pt-16 pb-12' : 'min-h-[90dvh] pt-20 pb-6 sm:pt-24 md:pt-16 lg:py-12'}`}>
             {/* Background statique moderne avec effets de flou */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 {/* Grille fine */}
@@ -191,7 +191,7 @@ const Hero = () => {
 
                             <RevealOnScroll delay={200} direction={isMobile ? "bottom" : "right"}>
                                 <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
-                                            text-transparent bg-clip-text bg-gradient-to-r from-white/90 to-white/60
+                                            text-white
                                             tracking-tight sm:tracking-[-0.02em] transform-gpu
                                             ${isMobile ? 'text-[32px] xs:text-[36px] mt-1' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                     DevOps
@@ -206,7 +206,7 @@ const Hero = () => {
 
                             <RevealOnScroll delay={300} direction="bottom">
                                 <h1 className={`font-black leading-[1] sm:leading-[1.05] md:leading-[1.1] 
-                                            text-transparent bg-clip-text bg-gradient-to-br from-[#8B5CF6] to-[#A78BFA]
+                                            text-[#8B5CF6]
                                             tracking-tight sm:tracking-[-0.02em] transform-gpu
                                             ${isMobile ? 'text-[32px] xs:text-[36px] mt-1' : 'text-[42px] xs:text-[48px] sm:text-[80px] md:text-[100px] lg:text-[140px] xl:text-[180px] 2xl:text-[220px] min-[1920px]:text-[260px]'}`}>
                                     & AI

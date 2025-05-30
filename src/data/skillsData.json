@@ -1,0 +1,111 @@
+{
+    "programming_languages": [
+        {
+            "name": "JavaScript",
+            "level": "Advanced",
+            "description": "Main language used for front-end and back-end development with frameworks such as ReactJS, NextJS, and NestJS."
+        },
+        {
+            "name": "TypeScript",
+            "level": "Intermediate",
+            "description": "A superset of JavaScript used for building more robust and typed applications with NextJS and NestJS."
+        },
+        {
+            "name": "Python",
+            "level": "Intermediate",
+            "description": "Used for API development with FastAPI, Flask, and for automation scripts."
+        },
+        {
+            "name": "Java",
+            "level": "Intermediate",
+            "description": "Used for backend projects with Spring Boot."
+        },
+        {
+            "name": "C#",
+            "level": "Beginner",
+            "description": "Experience in object-oriented programming during academic training."
+        },
+        {
+            "name": "C",
+            "level": "Beginner",
+            "description": "Basic knowledge of procedural programming, mainly in academic contexts."
+        },
+        {
+            "name": "PHP",
+            "level": "Intermediate",
+            "description": "Used with Laravel and CodeIgniter frameworks for dynamic web development."
+        }
+    ],
+    "frameworks_and_libraries": {
+        "frontend": [
+            "ReactJS",
+            "VueJS",
+            "NextJS",
+            "TailwindCSS",
+            "Flutter"
+        ],
+        "backend": [
+            "NestJS",
+            "AdonisJS",
+            "Laravel",
+            "CodeIgniter 3",
+            "CodeIgniter 4",
+            "FastAPI",
+            "Flask",
+            "Spring Boot",
+            "ExpressJS"
+        ]
+    },
+    "databases": [
+        {
+            "name": "PostgreSQL",
+            "description": "Used in projects with NestJS and microservices deployment."
+        },
+        {
+            "name": "MySQL",
+            "description": "Used in traditional web applications and academic projects."
+        },
+        {
+            "name": "MS Access",
+            "description": "Used in internal tools and office-based applications."
+        }
+    ],
+    "devops_and_servers": {
+        "tools": [
+            {
+                "name": "Docker",
+                "description": "Containerization of applications and setup of reproducible environments."
+            },
+            {
+                "name": "RabbitMQ",
+                "description": "Used for interservice communication in microservice architectures."
+            },
+            {
+                "name": "Jenkins",
+                "description": "Automation of CI/CD pipelines for backend deployment."
+            },
+            {
+                "name": "GitHub",
+                "description": "Version control, team collaboration, and continuous integration."
+            },
+            {
+                "name": "Nginx",
+                "description": "Web server configuration, reverse proxy setup, and SSL management via Certbot."
+            },
+            {
+                "name": "Certbot",
+                "description": "Used for the installation and automatic renewal of SSL certificates."
+            }
+        ]
+    },
+    "design_and_ui": [
+        {
+            "skill": "UI/UX Design",
+            "description": "Designing intuitive and user-friendly interfaces based on modern design principles."
+        },
+        {
+            "skill": "Responsive Design",
+            "description": "Creating layouts adaptable to all screen types using TailwindCSS."
+        }
+    ]
+}

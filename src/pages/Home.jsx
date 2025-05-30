@@ -1,11 +1,12 @@
 import { usePageTitle } from "../hooks";
-import { Hero } from "../components/commons";
+import { Hero, Skills } from "../components/commons";
 
 const Home = () => {
     usePageTitle("Home");
     return (
         <div>
             <Hero />
+            <Skills />
         </div>
     );
 };
