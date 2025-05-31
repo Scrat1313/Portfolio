@@ -39,7 +39,7 @@
                 "Spring Boot"
             ],
             "description": "Designed and implemented the UI/UX for the EMILIB application and developed its authentication module. Implement Authentication Service with JWT.",
-            "url": "emilib.emit.mg"
+            "url": "https://emilib.emit.mg"
         },
         {
             "title": "Microservices Architecture – Acceleration Week by PNUD",
@@ -90,7 +90,7 @@
                 "NextJS"
             ],
             "description": "Developed the administration interface (frontend & backend) and deployed the digital library platform 'TISRADAR'.",
-            "url": "admintisradar.hiqaody.me"
+            "url": "https://admintisradar.hiqaody.me"
         }
     ]
 }
