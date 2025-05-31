@@ -1,5 +1,5 @@
 import { usePageTitle } from "../hooks";
-import { Hero, Skills, BestProjects } from "../components/commons";
+import { Hero, Skills, BestProjects, Enterprises } from "../components/commons";
 
 const Home = () => {
     usePageTitle("Home");
@@ -8,6 +8,7 @@ const Home = () => {
             <Hero />
             <Skills />
             <BestProjects />
+            <Enterprises />
         </div>
     );
 };

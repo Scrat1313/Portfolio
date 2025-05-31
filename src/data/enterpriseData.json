@@ -1,0 +1,71 @@
+{
+    "enterprises": [
+        {
+            "id": 1,
+            "name": "EMIT - School of Management",
+            "logo": "/logos/emit-logo.png",
+            "description": "Development of the official website and library management application",
+            "industry": "Education",
+            "services": [
+                "Web Development",
+                "UI/UX Design",
+                "API Integration"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Aurum Cartel",
+            "logo": "/logos/aurum-logo.png",
+            "description": "Online trading education and practice platform",
+            "industry": "Finance",
+            "services": [
+                "Frontend Development",
+                "API Integration"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Madatlas",
+            "logo": "/logos/madatlas-logo.png",
+            "description": "Review platform for local businesses",
+            "industry": "Online Services",
+            "services": [
+                "Frontend Development",
+                "UI Design"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Ambalavao Municipality",
+            "logo": "/logos/ambalavao-logo.png",
+            "description": "Official website of the Ambalavao commune",
+            "industry": "Public Sector",
+            "services": [
+                "Frontend Development",
+                "UI/UX Design"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Marolook",
+            "logo": "/logos/marolook-logo.png",
+            "description": "Portfolio redesign",
+            "industry": "Multi-Services",
+            "services": [
+                "UI/UX Design",
+                "Frontend Development"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "PNUD Madagascar",
+            "logo": "/logos/pnud-logo.png",
+            "description": "Citizen participation project - PNUD Hackathon",
+            "industry": "NGO / International",
+            "services": [
+                "Frontend Development",
+                "Microservices Architecture"
+            ]
+        }
+    ]
+}
