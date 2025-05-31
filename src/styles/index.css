@@ -193,33 +193,3 @@
 .staggered-animation>*:nth-child(5) {
     animation: badge-appear 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.5s;
 }
-
-/* Best Projects */
-@keyframes slow-spin-15s {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes reverse-spin-20s {
-    0% { transform: rotate(360deg); }
-    100% { transform: rotate(0deg); }
-}
-
-.animate-slow-spin-15s {
-    animation: slow-spin-15s 15s linear infinite;
-}
-
-.animate-reverse-spin-20s {
-    animation: reverse-spin-20s 20s linear infinite;
-}
-
-.border-gradient-to-r {
-    border-image-slice: 1;
-    border-image-source: linear-gradient(to right, #DAA520, #8B5CF6);
-}
-
-.text-gradient-to-r {
-    background: linear-gradient(to right, #DAA520, #8B5CF6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
