@@ -1,5 +1,5 @@
 import { usePageTitle } from "../hooks";
-import { Hero, Skills } from "../components/commons";
+import { Hero, Skills, BestProjects } from "../components/commons";
 
 const Home = () => {
     usePageTitle("Home");
@@ -7,6 +7,7 @@ const Home = () => {
         <div>
             <Hero />
             <Skills />
+            <BestProjects />
         </div>
     );
 };

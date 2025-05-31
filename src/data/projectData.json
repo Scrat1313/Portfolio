@@ -1,0 +1,96 @@
+{
+    "projects": [
+        {
+            "title": "Aurum Cartel Web Application",
+            "role": "Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS"
+            ],
+            "description": "Developed the frontend of Aurum Cartel, an online trading education platform designed to help users learn and practice trading strategies effectively.",
+            "url": "https://aurum-cartel.alainpatrick.tech/"
+        },
+        {
+            "title": "Madatlas Review Platform",
+            "role": "Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS"
+            ],
+            "description": "Implemented and integrated the UI for the Madatlas review application.",
+            "url": "http://dev.itdcmada.mg/"
+        },
+        {
+            "title": "EMIT Official Website",
+            "role": "Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS"
+            ],
+            "description": "Developed the user interface for the official website of the Ecole de Management et d'Innovation Technologique (EMIT), focusing on responsive design and seamless user experience.",
+            "url": "https://site.emit.mg"
+        },
+        {
+            "title": "EMILIB Web Application",
+            "role": "Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS",
+                "Spring Boot"
+            ],
+            "description": "Designed and implemented the UI/UX for the EMILIB application and developed its authentication module. Implement Authentication Service with JWT.",
+            "url": "emilib.emit.mg"
+        },
+        {
+            "title": "Microservices Architecture – Acceleration Week by PNUD",
+            "role": "Microservices Architect",
+            "technologies": [
+                "ExpressJS"
+            ],
+            "description": "Contributed to improving civic engagement through microservice architecture design during the PNUD Acceleration Week.",
+            "url": "https://gateway.hiqaody.me"
+        },
+        {
+            "title": "Ambalavao Website",
+            "role": "Freelance Designer & Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS"
+            ],
+            "description": "Implemented the official website of Ambalavao with a modern and responsive design.",
+            "url": "https://ambalavao.vercel.app"
+        },
+        {
+            "title": "Marolook Website Redesign",
+            "role": "Freelance Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS"
+            ],
+            "description": "Redesigned and implemented the Marolook website with an improved interface and user experience.",
+            "url": "https://www.marolook.com"
+        },
+        {
+            "title": "Citizen Participation – Hackathon PNUD",
+            "role": "Frontend Developer",
+            "technologies": [
+                "ReactJS",
+                "TailwindCSS"
+            ],
+            "description": "Developed a user interface for a civic engagement platform; won 1st place at the PNUD Hackathon.",
+            "url": "https://diamadio.hiqaody.me"
+        },
+        {
+            "title": "Tisradar Digital Library",
+            "role": "Backend and DevOps Developer",
+            "technologies": [
+                "Spring Boot",
+                "Docker",
+                "Jenkins",
+                "NextJS"
+            ],
+            "description": "Developed the administration interface (frontend & backend) and deployed the digital library platform 'TISRADAR'.",
+            "url": "admintisradar.hiqaody.me"
+        }
+    ]
+}
