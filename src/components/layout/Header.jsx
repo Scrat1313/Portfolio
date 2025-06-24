@@ -89,7 +89,7 @@ const Header = () => {
                     ? 'py-2 bg-[#0B0B0B]/90 backdrop-blur-lg shadow-lg shadow-[#000]/20'
                     : 'py-4 bg-transparent'}`}
         >
-            <div className="max-w-7xl px-4 sm:px-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <Link to={routes.home} className="flex items-center gap-2 group">
