@@ -98,6 +98,8 @@ const Header = () => {
                                         <span className="text-xs text-white/50">Developer</span>
                                         <span className="mx-1.5 text-[10px] text-[#8B5CF6]">•</span>
                                         <span className="text-xs text-white/50">Designer</span>
+                                        <span className="mx-1.5 text-[10px] text-[#8B5CF6]">•</span>
+                                        <span className="text-xs text-white/50">AI</span>
                                     </div>
                                 </div>
                             </div>

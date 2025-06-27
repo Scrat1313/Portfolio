@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ProfileCard, RevealOnScroll, TrueFocus, CircularText } from './';
+import { ProfileCard, RevealOnScroll, TrueFocus } from './';
+import ArrowDownIcon from '@mui/icons-material/ArrowDownward';
 import cardData from '../../data/cardHeroData.json';
-// Material UI Icons
-import DownloadIcon from '@mui/icons-material/Download';
-import GetAppIcon from '@mui/icons-material/GetApp';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -29,7 +27,7 @@ const Hero = () => {
     // Set up cycling animation between the three titles
     useEffect(() => {
         const animationDuration = 0.5; // Duration of blur/unblur effect
-        const displayDuration = 2.5; // How long to show each text
+        const displayDuration = 1.5; // How long to show each text
 
         const interval = setInterval(() => {
             setActiveTextIndex(prev => (prev + 1) % 3);
@@ -38,28 +36,8 @@ const Hero = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Handle CV download
-    const handleDownload = (e) => {
-        // Feedback visuel
-        setIsDownloading(true);
-        setTimeout(() => setIsDownloading(false), 500);
-
-        // Track download event if analytics are available
-        if (window.gtag) {
-            window.gtag('event', 'cv_download', {
-                event_category: 'engagement',
-                event_label: 'CV Download'
-            });
-        }
-
-        console.log("Download CV clicked");
-    };
-
     // Text size classes - Optimized for responsiveness
     const textSizeClasses = "text-[50px] xs:text-[55px] sm:text-[70px] md:text-[90px] lg:text-[120px] xl:text-[160px] 2xl:text-[190px]";
-
-    // CV download path - using absolute path for better reliability
-    const cvPath = "/assets/files/CV_Alain_Patrick_RAMAHEFARSON.pdf";
 
     return (
         <section className={`relative w-full overflow-hidden
