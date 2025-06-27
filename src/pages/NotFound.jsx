@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { usePageTitle } from "../hooks";
+import { usePageTitle, useScrollToTop } from "../hooks";
 import { RevealOnScroll } from "../components/commons";
 
 // Import des icônes
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ErrorIcon from '@mui/icons-material/Error';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CodeOffIcon from '@mui/icons-material/CodeOff';
 
 const NotFound = () => {
     usePageTitle("404 - Page Not Found");
+    useScrollToTop();
 
     return (
         <section className="w-full min-h-screen bg-[#0a0a0a] flex flex-col md:flex-row overflow-hidden">

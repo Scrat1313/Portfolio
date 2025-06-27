@@ -1,8 +1,9 @@
-import { usePageTitle } from "../hooks";
+import { usePageTitle, useScrollToTop } from "../hooks";
 import { Hero, Skills, BestProjects, Enterprises } from "../components/commons";
 
 const Home = () => {
     usePageTitle("Home");
+    useScrollToTop();
     return (
         <div>
             <Hero />

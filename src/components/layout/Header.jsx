@@ -4,7 +4,6 @@ import routes from '../../routes/routes';
 import logo from '../../assets/images/PrimaryLogo.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import DownloadIcon from '@mui/icons-material/Download';
 
 const Header = () => {
     const location = useLocation();
@@ -55,150 +54,149 @@ const Header = () => {
 
     // Handle body overflow when mobile menu is open
     useEffect(() => {
-        // Prevent background scrolling when menu is open
         if (isExpanded) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
         }
 
-        // Cleanup function to ensure body scroll is restored
         return () => {
             document.body.style.overflow = 'auto';
         };
     }, [isExpanded]);
 
-    // Handle resume download
-    const handleDownloadResume = () => {
-        // Replace with your resume file path
-        const resumeUrl = '../../assets/files/CV_Alain Patrick_RAMAHEFARSON.pdf';
-
-        // Create an anchor element and trigger download
-        const link = document.createElement('a');
-        link.href = resumeUrl;
-        link.download = 'CV_Alain Patrick_RAMAHEFARSON.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
-
     return (
-        <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full
-                ${isScrolled
-                    ? 'py-2 bg-[#0B0B0B]/90 backdrop-blur-lg shadow-lg shadow-[#000]/20'
-                    : 'py-4 bg-transparent'}`}
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                <div className="flex items-center justify-between">
-                    {/* Logo */}
-                    <Link to={routes.home} className="flex items-center gap-2 group">
-                        <div
-                            className={`h-10 w-10 rounded-xl flex items-center justify-center
-                                ${isScrolled ? 'bg-[#1B1B1B]' : 'bg-[#1B1B1B]/80'} 
-                                group-hover:bg-gradient-to-r from-[#DAA520]/80 to-[#8B5CF6]/80 transition-all duration-300 p-1.5`}
-                        >
-                            <img src={logo} alt="Logo" className="w-full h-full object-contain" />
-                        </div>
-                        <div className="flex flex-col">
-                            <h1 className="text-lg font-extrabold text-[#DAA520] tracking-tight leading-none">
-                                Scrat<span className="text-[#8B5CF6]">.</span>
-                            </h1>
-                            <span className="text-[10px] text-white/50 leading-none font-medium">Developer & Designer</span>
-                        </div>
-                    </Link>
+        <>
+            <div className="h-20"></div>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-8 text-[#FFFFFF]">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                to={item.path}
-                                className={`relative px-2 py-1 font-medium transition-colors duration-300
-                                    ${activeLink === item.path ? 'text-[#DAA520]' : 'text-[#FFFFFF]/80 hover:text-white'}`}
-                            >
-                                {item.name}
-                                {activeLink === item.path && (
-                                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-[#DAA520] to-[#8B5CF6] rounded-full"></span>
-                                )}
-                            </Link>
-                        ))}
+            <header
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+                    ${isScrolled ? 'h-16' : 'h-20'}`}
+            >
+                {/* Semi-transparent background with purple tint when scrolled */}
+                <div
+                    className={`absolute inset-0 transition-opacity duration-300
+                        ${isScrolled ? 'opacity-95 bg-gradient-to-r from-[#0B0B0B] to-[#0D0A12] backdrop-blur-sm' : 'opacity-0'}`}
+                ></div>
 
-                        {/* Resume Download Button */}
-                        <button
-                            onClick={handleDownloadResume}
-                            className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#DAA520] to-[#8B5CF6] text-white font-medium flex items-center gap-1.5 text-sm hover:shadow-lg hover:shadow-[#8B5CF6]/20 transition-all"
-                        >
-                            <DownloadIcon fontSize="small" />
-                            <span>Resume</span>
-                        </button>
-                    </nav>
+                {/* Subtle purple top border */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/30 to-transparent"></div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex items-center md:hidden">
+                <div className="relative z-10 h-full max-w-7xl mx-auto px-6">
+                    <div className="flex items-center justify-between h-full">
+                        {/* Logo - Restored with minimal container */}
+                        <Link to={routes.home} className="flex items-center group">
+                            <div className="flex items-center">
+                                <div className={`mr-3 h-9 w-9 rounded-lg flex items-center justify-center bg-[#0D0A12] border border-[#8B5CF6]/10 group-hover:border-[#8B5CF6]/30 transition-colors duration-300`}>
+                                    <img src={logo} alt="Logo" className="w-5 h-5 object-contain" />
+                                </div>
+
+                                <div>
+                                    <span className="text-xl font-bold text-[#DAA520]">Scrat</span>
+                                    <span className="text-xl font-bold text-[#8B5CF6]">.</span>
+                                    <div className="flex items-center">
+                                        <span className="text-xs text-white/50">Developer</span>
+                                        <span className="mx-1.5 text-[10px] text-[#8B5CF6]">•</span>
+                                        <span className="text-xs text-white/50">Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+
+                        {/* Desktop Navigation - With purple accents */}
+                        <nav className="hidden md:flex items-center space-x-12">
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.name}
+                                    to={item.path}
+                                    className="group relative py-2"
+                                >
+                                    <span className={`text-sm font-normal uppercase tracking-wider transition-colors
+                                        ${activeLink === item.path
+                                            ? 'text-[#DAA520]'
+                                            : 'text-white/70 group-hover:text-white'}`}
+                                    >
+                                        {item.name}
+                                    </span>
+
+                                    {/* Two-tone line indicator */}
+                                    {activeLink === item.path ? (
+                                        <span className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#DAA520] to-[#8B5CF6]"></span>
+                                    ) : (
+                                        <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-[#8B5CF6]/60 group-hover:w-full transition-all duration-300 ease-out"></span>
+                                    )}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        {/* Mobile Menu Button - With purple hover */}
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="w-10 h-10 rounded-lg bg-[#1B1B1B]/80 flex items-center justify-center text-[#DAA520]"
+                            className="md:hidden flex items-center group"
                             aria-label="Toggle navigation"
                         >
-                            {isExpanded ? <CloseIcon /> : <MenuIcon />}
+                            <div className={`transition-colors duration-300 
+                                ${isExpanded ? 'text-[#8B5CF6]' : 'text-[#DAA520] group-hover:text-[#8B5CF6]'}`}>
+                                {isExpanded ? <CloseIcon /> : <MenuIcon />}
+                            </div>
                         </button>
                     </div>
                 </div>
-            </div>
 
-            {/* Mobile Navigation Menu - Fixed positioning to avoid layout shift */}
-            <div
-                ref={navigationRef}
-                className={`fixed top-[calc(var(--header-height,60px))] left-0 right-0 bottom-0 bg-[#0B0B0B]/95 backdrop-blur-lg shadow-lg transform transition-all duration-300 overflow-y-auto
-                    ${isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-[-10px] opacity-0 pointer-events-none'}`}
-                style={{
-                    '--header-height': isScrolled ? '56px' : '72px',
-                    maxHeight: 'calc(100vh - var(--header-height, 60px))'
-                }}
-            >
-                <div className="max-w-7xl mx-auto px-4 py-5">
-                    <nav className="grid gap-1 mb-6">
-                        {navItems.map((item, index) => (
-                            <Link
-                                key={item.name}
-                                to={item.path}
-                                onClick={() => {
-                                    setActiveLink(item.path);
-                                    setIsExpanded(false);
-                                }}
-                                className={`px-4 py-3 rounded-lg flex items-center justify-between
-                                    ${activeLink === item.path
-                                        ? 'bg-gradient-to-r from-[#DAA520]/10 to-[#8B5CF6]/10 text-[#DAA520] border-l-2 border-[#DAA520]'
-                                        : 'text-[#FFFFFF]/90 border-l-2 border-transparent'
-                                    } transition-colors duration-200`}
-                            >
-                                <span className="flex items-center">
-                                    <span className="mr-3 flex items-center justify-center w-5 h-5 text-sm font-normal text-[#8B5CF6]/80">
-                                        0{index + 1}
+                {/* Minimal mobile menu with purple accents */}
+                <div
+                    ref={navigationRef}
+                    className={`fixed inset-0 z-0 bg-gradient-to-b from-[#0B0B0B] to-[#0D0A12] transition-opacity duration-500 flex items-center justify-center
+                        ${isExpanded ? 'opacity-98 visible' : 'opacity-0 invisible pointer-events-none'}`}
+                >
+                    {/* Purple decorative element */}
+                    <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-[#8B5CF6]/5 blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-[#8B5CF6]/5 blur-2xl"></div>
+
+                    <div className="relative z-10 w-full max-w-sm">
+                        <nav className="flex flex-col items-center">
+                            {navItems.map((item, index) => (
+                                <Link
+                                    key={item.name}
+                                    to={item.path}
+                                    onClick={() => {
+                                        setActiveLink(item.path);
+                                        setIsExpanded(false);
+                                    }}
+                                    className={`relative block w-full text-center py-6 border-b ${index === 0 ? 'border-t' : ''} 
+                                        ${activeLink === item.path
+                                            ? 'border-[#8B5CF6]/20'
+                                            : 'border-white/10'}`}
+                                >
+                                    <span className={`text-xl tracking-wide
+                                        ${activeLink === item.path ? 'text-[#DAA520]' : 'text-white'}`}
+                                    >
+                                        {item.name}
                                     </span>
-                                    {item.name}
-                                </span>
-                            </Link>
-                        ))}
-                    </nav>
 
-                    {/* Mobile Resume */}
-                    <div className="flex flex-col gap-4 pb-6">
-                        <button
-                            onClick={() => {
-                                handleDownloadResume();
-                                setIsExpanded(false);
-                            }}
-                            className="py-3 rounded-lg bg-gradient-to-r from-[#DAA520] to-[#8B5CF6] text-white font-medium flex items-center justify-center gap-2"
-                        >
-                            <DownloadIcon />
-                            <span>Download Resume</span>
-                        </button>
+                                    {/* Purple and gold dot indicators for current page */}
+                                    {activeLink === item.path && (
+                                        <>
+                                            <span className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#DAA520]"></span>
+                                            <span className="absolute right-3 top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-[#8B5CF6]/50"></span>
+                                        </>
+                                    )}
+                                </Link>
+                            ))}
+                        </nav>
                     </div>
                 </div>
+            </header>
+
+            {/* Subtle purple gradient separator - only visible when scrolled */}
+            <div
+                className={`fixed top-[var(--header-height)] left-0 right-0 h-px z-40 transition-opacity duration-300 
+                    ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
+                style={{ '--header-height': isScrolled ? '64px' : '80px' }}
+            >
+                <div className="h-full bg-gradient-to-r from-transparent via-[#8B5CF6]/15 to-transparent"></div>
             </div>
-        </header>
+        </>
     );
 };
 
