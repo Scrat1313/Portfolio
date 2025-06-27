@@ -3,11 +3,13 @@ import { ProfileCard, RevealOnScroll, TrueFocus, CircularText } from './';
 import cardData from '../../data/cardHeroData.json';
 // Material UI Icons
 import DownloadIcon from '@mui/icons-material/Download';
+import GetAppIcon from '@mui/icons-material/GetApp';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [activeTextIndex, setActiveTextIndex] = useState(0); // Controls which text is active
+    const [isDownloading, setIsDownloading] = useState(false); // État pour le feedback visuel au clic
 
     // Detect if device is mobile or small screen
     useEffect(() => {
@@ -38,6 +40,10 @@ const Hero = () => {
 
     // Handle CV download
     const handleDownload = (e) => {
+        // Feedback visuel
+        setIsDownloading(true);
+        setTimeout(() => setIsDownloading(false), 500);
+
         // Track download event if analytics are available
         if (window.gtag) {
             window.gtag('event', 'cv_download', {
@@ -45,6 +51,8 @@ const Hero = () => {
                 event_label: 'CV Download'
             });
         }
+
+        console.log("Download CV clicked");
     };
 
     // Text size classes - Optimized for responsiveness
@@ -62,47 +70,12 @@ const Hero = () => {
 
                 {/* Desktop description */}
                 <RevealOnScroll delay={600} direction="left">
-                    <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-[25vh] max-w-[200px] lg:max-w-[240px] xl:max-w-[280px] z-10">
+                    <div className="hidden md:block absolute left-8 lg:left-12 xl:left-16 top-[35vh] max-w-[200px] lg:max-w-[240px] xl:max-w-[280px] z-10">
                         <p className="text-white/90 text-sm lg:text-base font-light leading-relaxed">
                             <span className="text-[#DAA520] font-medium">Passionate</span> about web development,
                             DevOps infrastructure and artificial intelligence, I create
                             <span className="text-[#8B5CF6]"> innovative</span> and <span className="text-white font-medium">scalable</span> solutions for the modern web.
                         </p>
-                    </div>
-                </RevealOnScroll>
-
-                {/* Download CV button positioned on the right */}
-                <RevealOnScroll delay={600} direction="right">
-                    <div className="hidden md:block absolute right-8 lg:right-12 xl:right-16 top-[50vh] z-1000" onClick={() => console.log("Download")}>
-                        {/* Download CV button with circular text */}
-                        <div className="relative">
-                            <a
-                                href={cvPath}
-                                download="CV_Alain_Patrick_RAMAHEFARSON.pdf"
-                                onClick={handleDownload}
-                                className="group flex items-center relative hover:cursor-pointer"
-                                aria-label="Download CV"
-                                rel="noopener noreferrer"
-                                target="_blank" // Added to help with download in some browsers
-                            >
-                                {/* Circular Text Container - Responsive size */}
-                                <div className="relative w-36 h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 xl:w-48 xl:h-48">
-                                    <CircularText
-                                        text="DOWNLOAD·MY·RESUME·DOWNLOAD·MY·RESUME·"
-                                        spinDuration={15}
-                                        onHover="speedUp"
-                                        textColor="#DAA520"
-                                    />
-
-                                    {/* Center icon */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-14 h-14 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                                            <DownloadIcon className="text-[#DAA520] text-2xl" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                     </div>
                 </RevealOnScroll>
 
@@ -183,35 +156,6 @@ const Hero = () => {
                                 <span className="text-[#DAA520] font-medium">Passionate</span> about web development, DevOps and AI, creating
                                 <span className="text-[#8B5CF6]"> innovative</span> solutions for the modern web.
                             </p>
-                        </RevealOnScroll>
-
-                        {/* Mobile download CV button with circular text */}
-                        <RevealOnScroll delay={300} direction="bottom">
-                            <a
-                                href={cvPath}
-                                download="CV_Alain_Patrick_RAMAHEFARSON.pdf"
-                                onClick={handleDownload}
-                                className="mt-6 group relative flex flex-col items-center"
-                                aria-label="Download CV"
-                                rel="noopener noreferrer"
-                                target="_blank" // Added to help with download in some browsers
-                            >
-                                <div className="relative w-20 h-20 mb-2">
-                                    <CircularText
-                                        text="DOWNLOAD·MY·RESUME·CV·"
-                                        spinDuration={12}
-                                        onHover="speedUp"
-                                        textColor="#DAA520"
-                                    />
-
-                                    {/* Center icon */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-10 h-10 rounded-full bg-[#0D0A12] border border-[#DAA520]/30 group-hover:border-[#DAA520]/60 flex items-center justify-center transition-all duration-300 active:scale-90">
-                                            <DownloadIcon className="text-[#DAA520] text-sm" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
                         </RevealOnScroll>
                     </div>
                 )}
