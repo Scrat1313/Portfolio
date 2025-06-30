@@ -194,24 +194,6 @@ To report bugs or request features, please open an issue in the repository. Be s
 | ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
 |:---:|
 | ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
-| ![Avatar](https://github.com/Scrat1313.png) **@Scrat1313** |
 
 ## Code of Conduct
 
