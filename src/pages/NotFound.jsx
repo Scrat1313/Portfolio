@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { usePageTitle, useScrollToTop } from "../hooks";
 import { RevealOnScroll } from "../components/commons";
@@ -6,186 +6,359 @@ import { RevealOnScroll } from "../components/commons";
 // Import des icônes
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ErrorIcon from '@mui/icons-material/Error';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import CodeOffIcon from '@mui/icons-material/CodeOff';
+import BugReportIcon from '@mui/icons-material/BugReport';
+import CodeIcon from '@mui/icons-material/Code';
+import InfoIcon from '@mui/icons-material/Info';
 
 const NotFound = () => {
     usePageTitle("404 - Page Not Found");
     useScrollToTop();
 
+    // Refs for animations
+    const codeContainerRef = useRef(null);
+
+    // Animation states
+    const [loaded, setLoaded] = useState(false);
+    const [codeLines, setCodeLines] = useState([]);
+    const [bugsPositions, setBugsPositions] = useState([]);
+    const [errorMessages, setErrorMessages] = useState([]);
+
+    // Code snippets to display
+    const codeSnippets = [
+        'function findPage(url) {',
+        '  try {',
+        '    const page = loadPage(url);',
+        '    return page;',
+        '  } catch (error) {',
+        '    console.error("Page not found");',
+        '    throw new Error(404);',
+        '  }',
+        '}',
+        '',
+        'try {',
+        '  const currentPage = findPage(window.location.href);',
+        '  renderPage(currentPage);',
+        '} catch (e) {',
+        '  // Error: Page does not exist',
+        '  displayError(404);',
+        '}'
+    ];
+
+    // Error message templates
+    const possibleErrors = [
+        { message: 'Uncaught TypeError: Cannot read property "page" of undefined', color: '#ff6b6b' },
+        { message: 'Error 404: Resource not found at path: /unknown', color: '#DAA520' },
+        { message: 'Page load failed: Network error', color: '#8B5CF6' },
+        { message: 'Unable to resolve route: Path not recognized', color: '#ff6b6b' },
+        { message: 'Exception in component: Missing required props', color: '#DAA520' }
+    ];
+
+    // Initialize animations after component mounts
+    useEffect(() => {
+        setTimeout(() => setLoaded(true), 300);
+
+        // Animate code typing effect
+        let timeout = 500;
+        const newCodeLines = [];
+
+        codeSnippets.forEach((line, index) => {
+            setTimeout(() => {
+                newCodeLines.push(line);
+                setCodeLines([...newCodeLines]);
+            }, timeout);
+            timeout += line.length * 15 + 100; // Adjust typing speed based on line length
+        });
+
+        // Create random bugs that move across the screen
+        setTimeout(() => {
+            const bugs = [];
+            for (let i = 0; i < 8; i++) {
+                bugs.push({
+                    id: i,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                    size: 12 + Math.random() * 8,
+                    speed: 3 + Math.random() * 5,
+                    direction: Math.random() > 0.5 ? 1 : -1,
+                    rotation: Math.random() * 360
+                });
+            }
+            setBugsPositions(bugs);
+        }, 800);
+
+        // Show error messages periodically
+        const errorInterval = setInterval(() => {
+            if (errorMessages.length >= 3) {
+                // Remove oldest error before adding new one
+                setErrorMessages(prev => {
+                    const newErrors = [...prev];
+                    newErrors.shift();
+                    return newErrors;
+                });
+            }
+
+            const randomError = possibleErrors[Math.floor(Math.random() * possibleErrors.length)];
+            setErrorMessages(prev => [...prev, {
+                ...randomError,
+                id: Date.now(),
+                opacity: 1
+            }]);
+
+            // Fade out error message after a delay
+            setTimeout(() => {
+                setErrorMessages(prev =>
+                    prev.map(err =>
+                        err.id === randomError.id ? { ...err, opacity: 0 } : err
+                    )
+                );
+            }, 3000);
+
+        }, 2000);
+
+        // Move bugs around
+        const bugAnimation = setInterval(() => {
+            setBugsPositions(prev =>
+                prev.map(bug => ({
+                    ...bug,
+                    x: (bug.x + (bug.speed * bug.direction) / 10) % 100,
+                    y: (bug.y + (Math.sin(bug.x / 10) * 2)) % 100,
+                    rotation: (bug.rotation + bug.speed) % 360
+                }))
+            );
+        }, 100);
+
+        return () => {
+            clearInterval(errorInterval);
+            clearInterval(bugAnimation);
+        };
+    }, []);
+
     return (
         <section className="w-full min-h-screen bg-[#0a0a0a] flex flex-col md:flex-row overflow-hidden">
-            {/* Left side - Graphical representation */}
-            <div className="w-full md:w-1/2 bg-gradient-to-br from-[#121212] to-[#0a0a0a] min-h-[40vh] md:min-h-screen flex items-center justify-center relative p-8 md:p-12">
-                {/* Background elements */}
-                <div className="absolute inset-0 overflow-hidden">
-                    {/* Circuit patterns */}
-                    <div className="absolute inset-0 opacity-5">
-                        <div className="absolute left-[10%] right-[10%] top-0 bottom-0">
-                            <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-30">
-                                <path d="M0,50 L100,50" stroke="#DAA520" strokeWidth="0.2" />
-                                <path d="M30,0 L30,100" stroke="#8B5CF6" strokeWidth="0.2" />
-                                <path d="M60,0 L60,100" stroke="#DAA520" strokeWidth="0.2" />
-                                <path d="M85,0 L85,100" stroke="#8B5CF6" strokeWidth="0.2" />
-                                <path d="M0,25 L100,25" stroke="#DAA520" strokeWidth="0.2" />
-                                <path d="M0,75 L100,75" stroke="#8B5CF6" strokeWidth="0.2" />
-                                <circle cx="30" cy="50" r="2" fill="#DAA520" fillOpacity="0.5" />
-                                <circle cx="60" cy="25" r="2" fill="#8B5CF6" fillOpacity="0.5" />
-                                <circle cx="60" cy="75" r="2" fill="#DAA520" fillOpacity="0.5" />
-                                <circle cx="85" cy="50" r="2" fill="#8B5CF6" fillOpacity="0.5" />
-                            </svg>
+            {/* Left side - Code and bugs animation */}
+            <div className="w-full md:w-1/2 bg-[#0f0f0f] min-h-[50vh] md:min-h-screen flex items-center justify-center relative overflow-hidden">
+                {/* Background grid */}
+                <div className="absolute inset-0 grid grid-cols-6 grid-rows-12 opacity-10">
+                    {Array.from({ length: 72 }).map((_, idx) => (
+                        <div key={`grid-${idx}`} className="border-[0.5px] border-white/20"></div>
+                    ))}
+                </div>
+
+                {/* Code typing animation */}
+                <div
+                    ref={codeContainerRef}
+                    className={`w-full max-w-md font-mono text-sm md:text-base p-6 overflow-hidden 
+                        transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                >
+                    <div className="mb-4 flex items-center">
+                        <CodeIcon className="text-[#DAA520] mr-2" />
+                        <span className="text-white/80">404.js</span>
+                        <div className="ml-auto flex space-x-2">
+                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
                         </div>
                     </div>
 
-                    {/* Glowing orbs */}
-                    <div className="absolute top-1/4 left-1/4 w-40 h-40 rounded-full bg-[#DAA520]/10 blur-3xl"></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-60 h-60 rounded-full bg-[#8B5CF6]/10 blur-3xl"></div>
-                </div>
-
-                {/* Main 404 visual */}
-                <div className="relative z-10 text-center">
-                    <RevealOnScroll delay={100} direction="left">
-                        <div className="mb-6 flex justify-center">
-                            <div className="w-24 h-24 rounded-full bg-[#1B1B1B] border-4 border-[#DAA520]/30 flex items-center justify-center shadow-lg shadow-[#DAA520]/10">
-                                <ErrorIcon style={{ fontSize: "3rem" }} className="text-[#DAA520]" />
-                            </div>
+                    <div className="bg-[#121212] rounded-md p-4 text-white/70 overflow-hidden h-[400px] relative">
+                        {/* Line numbers */}
+                        <div className="absolute left-0 top-0 bottom-0 py-4 px-2 text-gray-600 select-none text-xs text-right">
+                            {Array.from({ length: 20 }).map((_, idx) => (
+                                <div key={`line-${idx}`} className="h-6">
+                                    {idx + 1}
+                                </div>
+                            ))}
                         </div>
-                    </RevealOnScroll>
 
-                    <RevealOnScroll delay={200} direction="left">
-                        <div className="relative">
-                            <h1 className="text-[120px] md:text-[160px] font-bold leading-none bg-clip-text text-transparent bg-gradient-to-br from-[#DAA520] to-[#8B5CF6] mb-0 drop-shadow-xl">
-                                404
-                            </h1>
-
-                            {/* Reflection effect */}
-                            <div className="text-[120px] md:text-[160px] font-bold leading-none bg-clip-text text-transparent bg-gradient-to-br from-[#DAA520]/5 to-[#8B5CF6]/5 mt-[-20px] transform scale-y-[-0.25] blur-sm opacity-30">
-                                404
-                            </div>
+                        {/* Code content */}
+                        <div className="pl-8">
+                            {codeLines.map((line, idx) => (
+                                <div key={idx} className="h-6 whitespace-pre">
+                                    <span className={
+                                        line.includes('error') || line.includes('Error') ? 'text-red-400' :
+                                            line.includes('function') || line.includes('const') ? 'text-[#8B5CF6]' :
+                                                line.includes('try') || line.includes('catch') ? 'text-[#DAA520]' :
+                                                    line.includes('//') ? 'text-green-500' :
+                                                        ''
+                                    }>
+                                        {line}
+                                    </span>
+                                    <span className="animate-pulse text-white/70">
+                                        {idx === codeLines.length - 1 ? '|' : ''}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
-                    </RevealOnScroll>
 
-                    {/* Decorative horizontal lines */}
-                    <div className="flex flex-col gap-1 mt-4">
-                        {Array.from({ length: 3 }).map((_, idx) => (
-                            <div
-                                key={`line-${idx}`}
-                                className={`h-[2px] rounded-full bg-gradient-to-r from-[#DAA520]/20 via-[#8B5CF6]/20 to-[#DAA520]/20 mx-auto ${idx === 0 ? 'w-3/4' : idx === 1 ? 'w-1/2' : 'w-1/4'
-                                    }`}
-                            ></div>
-                        ))}
+                        {/* Blinking cursor at the end of typing */}
+                        {codeLines.length === codeSnippets.length && (
+                            <div className="absolute top-4 left-[calc(8px+1.25rem)] mt-[15rem] h-6 flex items-center">
+                                <span className="w-2 h-5 bg-white/70 animate-pulse"></span>
+                            </div>
+                        )}
+
+                        {/* Error messages that appear and disappear */}
+                        <div className="absolute bottom-4 left-4 right-4">
+                            {errorMessages.map((error, idx) => (
+                                <div
+                                    key={error.id}
+                                    className="font-mono text-xs p-2 mb-2 rounded border-l-2 transition-all duration-500"
+                                    style={{
+                                        backgroundColor: `${error.color}20`,
+                                        borderColor: error.color,
+                                        opacity: error.opacity,
+                                        transform: `translateX(${error.opacity ? '0' : '20px'})`
+                                    }}
+                                >
+                                    {error.message}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Animated 404 made of code symbols */}
+                    <div className="mt-8 text-center">
+                        <h2 className="text-4xl md:text-5xl font-mono">
+                            <span className="text-[#DAA520]">{'{{'}</span>
+                            <span className="text-white px-1">404</span>
+                            <span className="text-[#8B5CF6]">{'}}'}</span>
+                        </h2>
                     </div>
                 </div>
 
-                {/* Decorative code blocks */}
-                <div className="absolute bottom-8 left-8 font-mono text-xs text-[#DAA520]/20 opacity-50">
-                    &lt;!-- ERROR 404 --&gt;
-                </div>
-                <div className="absolute top-8 right-8 font-mono text-xs text-[#8B5CF6]/20 opacity-50">
-                    &lt;/page&gt;
-                </div>
+                {/* Animated bugs moving around */}
+                {bugsPositions.map(bug => (
+                    <div
+                        key={bug.id}
+                        className="absolute transition-all duration-100 z-20 pointer-events-none"
+                        style={{
+                            left: `${bug.x}%`,
+                            top: `${bug.y}%`,
+                            transform: `rotate(${bug.rotation}deg)`,
+                            transition: 'left 0.5s ease-in-out, top 0.5s ease-in-out'
+                        }}
+                    >
+                        <BugReportIcon
+                            style={{
+                                fontSize: bug.size,
+                                color: bug.id % 2 === 0 ? '#DAA520' : '#8B5CF6'
+                            }}
+                        />
+                    </div>
+                ))}
             </div>
 
-            {/* Right side - Information and actions */}
-            <div className="w-full md:w-1/2 bg-[#0a0a0a] min-h-[60vh] md:min-h-screen flex items-center justify-center p-8 md:p-12 relative">
-                {/* Background pattern */}
-                <div className="absolute inset-0">
-                    <div className="absolute inset-0 grid grid-cols-6 grid-rows-12 opacity-5">
-                        {Array.from({ length: 72 }).map((_, idx) => (
-                            <div key={`grid-${idx}`} className="border-[0.5px] border-white/20"></div>
-                        ))}
+            {/* Right side - Error message and actions */}
+            <div className="w-full md:w-1/2 bg-[#0a0a0a] min-h-[50vh] md:min-h-screen flex items-center justify-center p-8 relative">
+                {/* Background elements - brackets */}
+                <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
+                    <div className={`absolute left-[-100px] top-[10%] text-[300px] font-mono transition-all duration-1000 ease-out
+                        ${loaded ? 'opacity-30 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
+                        {'{'}
+                    </div>
+                    <div className={`absolute right-[-100px] bottom-[10%] text-[300px] font-mono transition-all duration-1000 ease-out
+                        ${loaded ? 'opacity-30 translate-x-0' : 'opacity-0 translate-x-20'}`}>
+                        {'}'}
                     </div>
                 </div>
 
-                <div className="relative z-10 max-w-lg w-full">
-                    <RevealOnScroll delay={300} direction="right">
-                        <div className="mb-2 flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-[#DAA520]"></div>
-                            <div className="h-px flex-1 bg-gradient-to-r from-[#DAA520] to-transparent"></div>
+                {/* Glow effects */}
+                <div className="absolute top-1/4 left-1/4 w-40 h-40 rounded-full bg-[#DAA520]/10 blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-1/4 w-60 h-60 rounded-full bg-[#8B5CF6]/10 blur-3xl"></div>
+
+                <div className="relative z-10 w-full max-w-md">
+                    <RevealOnScroll delay={200} direction="right">
+                        {/* Animated status code indicator */}
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className="relative h-8 w-8 flex items-center justify-center">
+                                {/* Pulsing circle */}
+                                <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"></div>
+                                <div className="absolute inset-0 rounded-full bg-red-500/40"></div>
+                                <span className="relative text-xs font-mono font-bold text-white">404</span>
+                            </div>
+                            <div className="h-px flex-1 bg-gradient-to-r from-red-500/50 to-transparent"></div>
                         </div>
 
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                            Page Not Found
-                        </h2>
+                        {/* Main error message */}
+                        <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+                            Page <span className="text-[#DAA520]">Not</span> Found
+                        </h1>
 
-                        <div className="flex items-center gap-2 text-white/50 text-sm mb-6">
-                            <CodeOffIcon fontSize="small" />
-                            <span>HTTP 404 Error</span>
+                        <div className="mb-8">
+                            <p className="text-white/70 mb-4">
+                                The resource you're looking for either doesn't exist or has been moved to another URL.
+                            </p>
+
+                            {/* ASCII art stack trace */}
+                            <div className="font-mono text-xs text-white/40 mt-4 mb-6 border-l-2 border-[#8B5CF6]/50 pl-3 py-1">
+                                <div>at <span className="text-[#DAA520]">Object.getPageByPath</span> (router.js:134)</div>
+                                <div>at <span className="text-[#8B5CF6]">Router.resolveRoute</span> (router.js:237)</div>
+                                <div>at <span className="text-[#DAA520]">RouterContext.render</span> (context.js:86)</div>
+                            </div>
                         </div>
                     </RevealOnScroll>
 
                     <RevealOnScroll delay={400} direction="right">
-                        <p className="text-white/70 mb-8">
-                            The page you're looking for doesn't exist or has been moved.
-                            Please check that you've entered the correct URL or navigate
-                            back to the homepage.
-                        </p>
-                    </RevealOnScroll>
-
-                    {/* Common issues section */}
-                    <RevealOnScroll delay={500} direction="right">
-                        <div className="bg-[#1B1B1B]/40 backdrop-blur-sm rounded-xl border border-[#5B21B6]/20 p-5 mb-8">
+                        {/* Debug information */}
+                        <div className="bg-[#121212]/50 backdrop-blur-sm rounded-xl border border-white/5 p-5 mb-8">
                             <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
-                                <HelpOutlineIcon className="text-[#DAA520]" />
-                                Common Issues
+                                <InfoIcon className="text-[#DAA520]" fontSize="small" />
+                                Debug Information
                             </h3>
 
-                            <ul className="space-y-3 text-white/70">
-                                <li className="flex items-start gap-3">
-                                    <div className="min-w-[8px] h-[8px] rounded-full bg-[#DAA520] mt-1.5"></div>
-                                    <span>The URL may be misspelled or incorrect</span>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="min-w-[8px] h-[8px] rounded-full bg-[#8B5CF6] mt-1.5"></div>
-                                    <span>The page may have been moved or deleted</span>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="min-w-[8px] h-[8px] rounded-full bg-[#DAA520] mt-1.5"></div>
-                                    <span>You might not have access to this resource</span>
-                                </li>
-                            </ul>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <div className="text-white/50 mb-1">Error Code</div>
+                                    <div className="font-mono text-[#DAA520]">404 NOT_FOUND</div>
+                                </div>
+                                <div>
+                                    <div className="text-white/50 mb-1">Timestamp</div>
+                                    <div className="font-mono text-[#8B5CF6]">2025-06-27 20:25:11</div>
+                                </div>
+                                <div>
+                                    <div className="text-white/50 mb-1">Request ID</div>
+                                    <div className="font-mono text-white/80">
+                                        {Math.random().toString(36).substring(2, 15)}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="text-white/50 mb-1">Client</div>
+                                    <div className="font-mono text-white/80">
+                                        {navigator.userAgent.includes('Mozilla') ? 'Browser' : 'Unknown'}-Client
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </RevealOnScroll>
 
-                    {/* Navigation options */}
-                    <RevealOnScroll delay={600} direction="right">
+                        {/* Action buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Link
                                 to="/"
-                                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DAA520] to-[#8B5CF6] rounded-lg text-white font-medium hover:shadow-lg hover:shadow-[#8B5CF6]/25 transition-all"
+                                className="group flex-1 flex items-center justify-center gap-2 px-6 py-3.5 
+                                    bg-gradient-to-r from-[#DAA520] to-[#8B5CF6] rounded-lg text-white
+                                    font-medium transition-all duration-300 hover:shadow-lg hover:shadow-[#8B5CF6]/20"
                             >
-                                <HomeIcon fontSize="small" />
-                                Return Home
+                                <HomeIcon className="group-hover:scale-110 transition-transform duration-300" fontSize="small" />
+                                <span>Return Home</span>
                             </Link>
 
                             <button
                                 onClick={() => window.history.back()}
-                                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1B1B1B] border border-[#5B21B6]/20 rounded-lg text-white/80 font-medium hover:bg-[#1B1B1B]/80 hover:border-[#8B5CF6]/40 transition-all"
+                                className="group flex-1 flex items-center justify-center gap-2 px-6 py-3.5 
+                                    bg-[#121212] border border-white/10 rounded-lg text-white/80
+                                    font-medium hover:bg-[#1A1A1A] hover:border-white/20 
+                                    transition-all duration-300"
                             >
-                                <ArrowBackIcon fontSize="small" />
-                                Go Back
+                                <ArrowBackIcon className="group-hover:-translate-x-1 transition-transform duration-300" fontSize="small" />
+                                <span>Go Back</span>
                             </button>
                         </div>
                     </RevealOnScroll>
-                </div>
 
-                {/* Decorative elements */}
-                <div className="absolute bottom-6 right-6 opacity-10">
-                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="url(#paint0_linear)" strokeWidth="2" />
-                        <path d="M15 9L9 15M9 9L15 15" stroke="url(#paint1_linear)" strokeWidth="2" strokeLinecap="round" />
-                        <defs>
-                            <linearGradient id="paint0_linear" x1="2" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
-                                <stop stopColor="#DAA520" />
-                                <stop offset="1" stopColor="#8B5CF6" />
-                            </linearGradient>
-                            <linearGradient id="paint1_linear" x1="9" y1="12" x2="15" y2="12" gradientUnits="userSpaceOnUse">
-                                <stop stopColor="#DAA520" />
-                                <stop offset="1" stopColor="#8B5CF6" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
+                    {/* Corner decoration */}
+                    <div className="absolute bottom-0 right-0 transform translate-x-1/2 translate-y-1/2 opacity-30">
+                        <div className="text-9xl font-mono text-[#DAA520]">{'}'}</div>
+                    </div>
                 </div>
             </div>
         </section>

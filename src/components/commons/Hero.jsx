@@ -6,8 +6,7 @@ import cardData from '../../data/cardHeroData.json';
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
-    const [activeTextIndex, setActiveTextIndex] = useState(0); // Controls which text is active
-    const [isDownloading, setIsDownloading] = useState(false); // État pour le feedback visuel au clic
+    const [activeTextIndex, setActiveTextIndex] = useState(0);
 
     // Detect if device is mobile or small screen
     useEffect(() => {
