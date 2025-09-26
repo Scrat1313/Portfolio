@@ -8,7 +8,6 @@
                 "TailwindCSS"
             ],
             "description": "Developed the frontend of Aurum Cartel, an online trading education platform designed to help users learn and practice trading strategies effectively.",
-            "url": "https://aurum-cartel.alainpatrick.tech/"
         },
         {
             "title": "Madatlas Review Platform",
@@ -18,7 +17,7 @@
                 "TailwindCSS"
             ],
             "description": "Implemented and integrated the UI for the Madatlas review application.",
-            "url": "http://dev.itdcmada.mg/"
+            "url": "http://itdcmada.mg/"
         },
         {
             "title": "EMIT Official Website",
@@ -28,7 +27,7 @@
                 "TailwindCSS"
             ],
             "description": "Developed the user interface for the official website of the Ecole de Management et d'Innovation Technologique (EMIT), focusing on responsive design and seamless user experience.",
-            "url": "https://site.emit.mg"
+            "url": "https://www.emit.mg"
         },
         {
             "title": "EMILIB Web Application",
@@ -36,7 +35,7 @@
             "technologies": [
                 "ReactJS",
                 "TailwindCSS",
-                "Spring Boot"
+                "NestJS"
             ],
             "description": "Designed and implemented the UI/UX for the EMILIB application and developed its authentication module. Implement Authentication Service with JWT.",
             "url": "https://emilib.emit.mg"
@@ -48,7 +47,7 @@
                 "ExpressJS"
             ],
             "description": "Contributed to improving civic engagement through microservice architecture design during the PNUD Acceleration Week.",
-            "url": "https://gateway.hiqaody.me"
+            "url": "https://gateway.tsirylab.com"
         },
         {
             "title": "Ambalavao Website",
@@ -70,27 +69,5 @@
             "description": "Redesigned and implemented the Marolook website with an improved interface and user experience.",
             "url": "https://www.marolook.com"
         },
-        {
-            "title": "Citizen Participation – Hackathon PNUD",
-            "role": "Frontend Developer",
-            "technologies": [
-                "ReactJS",
-                "TailwindCSS"
-            ],
-            "description": "Developed a user interface for a civic engagement platform; won 1st place at the PNUD Hackathon.",
-            "url": "https://diamadio.hiqaody.me"
-        },
-        {
-            "title": "Tisradar Digital Library",
-            "role": "Backend and DevOps Developer",
-            "technologies": [
-                "Spring Boot",
-                "Docker",
-                "Jenkins",
-                "NextJS"
-            ],
-            "description": "Developed the administration interface (frontend & backend) and deployed the digital library platform 'TISRADAR'.",
-            "url": "https://admintisradar.hiqaody.me"
-        }
     ]
 }
