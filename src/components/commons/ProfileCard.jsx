@@ -24,7 +24,7 @@ const ProfileCard = ({ data, className = '' }) => {
                 w-40 sm:w-44 md:w-56 lg:w-72
                 h-auto
                 bg-gradient-to-tl from-white/5 to-white/10 backdrop-blur-md 
-                border-l border-t border-white/20 border-r border-b border-white/5
+                border-l border-t border-r border-b border-white/5
                 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.2)]
                 animate-float
                 rotate-[25deg]
