@@ -14,12 +14,6 @@ pipeline {
             }
         }
 
-        stage('Checkout GitLab') {
-            steps {
-                git url: 'git@gitlab.com:TON_USER/TON_REPO.git', credentialsId: 'gitlab-ssh', branch: 'main'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
