@@ -18,9 +18,9 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
-  <!-- Hubot Sans via Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.ico" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -35,6 +35,15 @@
   <meta name="twitter:title" content="Alain Patrick" />
   <meta name="twitter:description" content="Développeur web fullstack – Portfolio et projets de Alain Patrick." />
   <meta name="twitter:image" content="/og-image.jpg" />
+
+  <!-- Preconnect to external domains for faster resource loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  
+  <!-- Preload critical fonts -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -52,6 +61,10 @@
       margin: 0;
       padding: 0;
       overflow-x: unset;
+    }
+    /* Reduce layout shift during font loading */
+    html {
+      font-display: swap;
     }
   </style>
 </head>
