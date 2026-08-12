@@ -2,25 +2,18 @@
 # Dependencies
 node_modules/
 
-# Build outputs
-dist/
-build/
-coverage/
-
-# Logs
-*.log
-
-# Environment variables
+# Environment
 .env
 .env.local
 .env.*
 
-# Editor/IDE
+# Logs and temp files
+*.log
+*.tmp
+
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
 
 # Python
 __pycache__/
@@ -28,12 +21,8 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-env/
 venv/
 .venv/
-.ENV
-.python-version
-
-# Vite specific
-.vite/
+.env
+.env.*
 ```

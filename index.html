@@ -16,11 +16,15 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.alainpatrick.dev" />
 
-  <!-- Favicon -->
+  <!-- Favicon - Optimized with multiple sizes -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  
+  <!-- Preload main JavaScript bundle -->
+  <link rel="modulepreload" href="/src/main.jsx" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -39,44 +43,71 @@
   <!-- Preconnect to external domains for faster resource loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://www.googletagmanager.com" />
   
-  <!-- Preload critical fonts -->
+  <!-- DNS Prefetch for analytics -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  
+  <!-- Load fonts with display swap to prevent FOIT -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KZ6FWXSG');</script>
+  <!-- Google Tag Manager - Deferred to improve LCP -->
+  <script>
+    // Defer GTM loading until after page load to improve Core Web Vitals
+    window.addEventListener('load', function() {
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KZ6FWXSG');
+    });
+  </script>
   <!-- End Google Tag Manager -->
 
 
-  <!-- Style global (Hubot Sans par défaut) -->
+  <!-- Critical CSS - Inline for faster FCP -->
   <style>
     body {
       font-family: 'Hubot Sans', sans-serif;
       margin: 0;
       padding: 0;
       overflow-x: unset;
+      background-color: #0B0B0B;
     }
-    /* Reduce layout shift during font loading */
     html {
       font-display: swap;
+      scroll-behavior: smooth;
+    }
+    /* Prevent layout shift - reserve space for root */
+    #root {
+      min-height: 100vh;
+    }
+    /* Critical above-the-fold styles */
+    .skeleton-loader {
+      background: linear-gradient(90deg, #1B1B1B 25%, #2A2A2A 50%, #1B1B1B 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
   </style>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" as="image" href="/src/assets/images/PrimaryLogo.png" fetchpriority="high" />
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) - Loaded asynchronously -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ6FWXSG"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  height="0" width="0" style="display:none;visibility:hidden" loading="lazy"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <div id="root" role="main"></div>
+  <!-- Defer non-critical JS, use async for faster parsing -->
+  <script type="module" src="/src/main.jsx" async></script>
 </body>
 
 </html>
