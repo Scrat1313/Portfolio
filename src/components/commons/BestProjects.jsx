@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { RevealOnScroll } from '.';
 
@@ -20,12 +20,12 @@ import projectsData from '../../data/projectData.json';
 const BestProject = () => {
     const [activeProject, setActiveProject] = useState(0);
     const sliderRef = useRef(null);
+    
+    // Memoize featured projects to prevent recalculation on each render
+    const featuredProjects = useMemo(() => projectsData.projects.slice(0, 5), []);
 
-    // Sélectionner les 5 premiers projets
-    const featuredProjects = projectsData.projects.slice(0, 5);
-
-    // Obtenir l'icône appropriée pour une technologie
-    const getTechIcon = (tech) => {
+    // Memoize icon getter function
+    const getTechIcon = useMemo(() => (tech) => {
         if (tech.includes("React") || tech.includes("JS") || tech.includes("Vue")) {
             return <CodeIcon fontSize="small" />;
         } else if (tech.includes("Tailwind") || tech.includes("CSS")) {
@@ -34,9 +34,9 @@ const BestProject = () => {
             return <StorageIcon fontSize="small" />;
         }
         return <CodeIcon fontSize="small" />;
-    };
+    }, []);
 
-    // Fonction pour défiler vers le projet sélectionné
+    // Function to scroll to selected project
     const scrollToProject = (index) => {
         setActiveProject(index);
     };

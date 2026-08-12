@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { RevealOnScroll } from "./";
 
 // Import des icônes
@@ -37,7 +37,6 @@ const projectImages = {
 
 // Fonction pour obtenir l'image correspondant au titre du projet
 const getProjectImage = (title) => {
-    // Correspondance entre les titres des projets et les noms de fichiers
     const imageMapping = {
         "Aurum Cartel Web Application": "AurumCartel",
         "Madatlas Review Platform": "Madatlas",
@@ -51,30 +50,24 @@ const getProjectImage = (title) => {
     };
 
     const imageName = imageMapping[title];
-    if (imageName && projectImages[imageName]) {
-        return projectImages[imageName];
-    }
-
-    // Image de secours si aucune correspondance n'est trouvée
-    return null;
+    return imageName && projectImages[imageName] ? projectImages[imageName] : null;
 };
 
 const AllProjects = () => {
     const [filter, setFilter] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredProjects, setFilteredProjects] = useState([]);
-    const [view, setView] = useState('grid'); // 'grid' ou 'list'
+    const [view, setView] = useState('grid');
     const [hoveredProject, setHoveredProject] = useState(null);
 
-    // Extract all unique technologies for filter options
-    const allTechnologies = [
-        ...new Set(
-            projectsData.projects.flatMap(project => project.technologies)
-        )
-    ];
+    // Extract all unique technologies for filter options - memoized
+    const allTechnologies = useMemo(() => 
+        [...new Set(projectsData.projects.flatMap(project => project.technologies))],
+        []
+    );
 
-    // Get appropriate icon for a technology
-    const getTechIcon = (tech) => {
+    // Get appropriate icon for a technology - memoized
+    const getTechIcon = useCallback((tech) => {
         if (tech.includes("React") || tech.includes("Express") || tech.includes("Next")) {
             return <CodeIcon className="text-[#DAA520]" fontSize="small" />;
         } else if (tech.includes("Tailwind") || tech.includes("CSS")) {
@@ -83,26 +76,24 @@ const AllProjects = () => {
             return <StorageIcon className="text-[#DAA520]" fontSize="small" />;
         }
         return <DesignServicesIcon className="text-[#8B5CF6]" fontSize="small" />;
-    };
+    }, []);
 
-    // Generate a visual identifier color based on project name
-    const getProjectColor = (title) => {
+    // Generate a visual identifier color based on project name - memoized
+    const getProjectColor = useCallback((title) => {
         const colors = [
             'from-[#DAA520] to-[#8B5CF6]',
             'from-[#8B5CF6] to-[#DAA520]',
             'from-[#DAA520] to-[#FFD700]',
             'from-[#8B5CF6] to-[#9F7AEA]'
         ];
-
         const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
         return colors[hash % colors.length];
-    };
+    }, []);
 
-    // Apply filters
+    // Apply filters - optimized with useMemo and useCallback
     useEffect(() => {
         let result = projectsData.projects;
 
-        // Apply search filter
         if (searchTerm.trim() !== '') {
             const term = searchTerm.toLowerCase();
             result = result.filter(project =>
@@ -112,7 +103,6 @@ const AllProjects = () => {
             );
         }
 
-        // Apply technology filter
         if (filter !== 'all') {
             result = result.filter(project =>
                 project.technologies.includes(filter)

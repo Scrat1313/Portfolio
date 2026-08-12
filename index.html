@@ -43,14 +43,17 @@
   <!-- Preconnect to external domains for faster resource loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   
-  <!-- DNS Prefetch for analytics -->
+  <!-- DNS Prefetch for analytics and CDN -->
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://vercel.com" />
   
   <!-- Load fonts with display swap to prevent FOIT -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hubot+Sans:wght@400;500;700;900&display=swap" /></noscript>
 
   <!-- Google Tag Manager - Deferred to improve LCP -->
   <script>
@@ -97,6 +100,9 @@
   
   <!-- Preload critical resources -->
   <link rel="preload" as="image" href="/src/assets/images/PrimaryLogo.png" fetchpriority="high" />
+  
+  <!-- Resource hints for agent navigation -->
+  <link rel="prefetch" href="/achievements" as="document" />
 </head>
 
 <body>

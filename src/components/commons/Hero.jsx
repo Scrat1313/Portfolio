@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ProfileCard, RevealOnScroll, TrueFocus } from './';
 import ArrowDownIcon from '@mui/icons-material/ArrowDownward';
 import cardData from '../../data/cardHeroData.json';
@@ -7,26 +7,37 @@ const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [activeTextIndex, setActiveTextIndex] = useState(0);
+    
+    // Memoize text size classes to prevent recalculation
+    const textSizeClasses = useMemo(() => 
+        "text-[50px] xs:text-[55px] sm:text-[70px] md:text-[90px] lg:text-[120px] xl:text-[160px] 2xl:text-[190px]", 
+        []
+    );
 
-    // Detect if device is mobile or small screen
+    // Detect if device is mobile or small screen - optimized with debounce
     useEffect(() => {
+        let resizeTimer;
         const checkScreenSize = () => {
             setIsMobile(window.innerWidth < 640);
             setIsSmallScreen(window.innerWidth < 1024);
         };
 
         checkScreenSize();
-        window.addEventListener('resize', checkScreenSize);
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(checkScreenSize, 100);
+        });
 
         return () => {
+            clearTimeout(resizeTimer);
             window.removeEventListener('resize', checkScreenSize);
         };
     }, []);
 
     // Set up cycling animation between the three titles
     useEffect(() => {
-        const animationDuration = 0.5; // Duration of blur/unblur effect
-        const displayDuration = 1.5; // How long to show each text
+        const animationDuration = 0.5;
+        const displayDuration = 1.5;
 
         const interval = setInterval(() => {
             setActiveTextIndex(prev => (prev + 1) % 3);
@@ -34,9 +45,6 @@ const Hero = () => {
 
         return () => clearInterval(interval);
     }, []);
-
-    // Text size classes - Optimized for responsiveness
-    const textSizeClasses = "text-[50px] xs:text-[55px] sm:text-[70px] md:text-[90px] lg:text-[120px] xl:text-[160px] 2xl:text-[190px]";
 
     return (
         <section className={`relative w-full overflow-hidden

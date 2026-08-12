@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 import { RevealOnScroll } from './';
 import skillsData from '../../data/skillsData.json';
 // Import des icônes
@@ -16,33 +16,31 @@ import SecurityIcon from '@mui/icons-material/Security';
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
 
 const Skills = () => {
-    // Toutes les sections sont masquées par défaut (false)
-    const [expandedSections, setExpandedSections] = useState({
+    // Memoize initial state to prevent recalculation
+    const initialExpandedState = useMemo(() => ({
         programming_languages: false,
         frameworks_and_libraries: false,
         databases: false,
         devops_and_servers: false,
         design_and_ui: false,
-        network_and_security: false // Ajout de la nouvelle section
-    });
-
+        network_and_security: false
+    }), []);
+    
+    const [expandedSections, setExpandedSections] = useState(initialExpandedState);
     const [hoveredItem, setHoveredItem] = useState(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const containerRef = useRef(null);
     const contentRefs = useRef({});
 
-    // Animations d'ouverture et fermeture plus fluides
+    // Animations d'ouverture et fermeture plus fluides - optimized
     useEffect(() => {
-        // Pour chaque section, initialiser la hauteur CSS
         Object.keys(expandedSections).forEach(section => {
             if (contentRefs.current[section]) {
                 const content = contentRefs.current[section];
                 if (expandedSections[section]) {
-                    // Si expanded, définir la hauteur à la hauteur réelle du contenu
                     content.style.maxHeight = content.scrollHeight + "px";
                     content.style.opacity = "1";
                 } else {
-                    // Si fermé, définir la hauteur à 0
                     content.style.maxHeight = "0";
                     content.style.opacity = "0";
                 }
@@ -50,27 +48,29 @@ const Skills = () => {
         });
     }, [expandedSections]);
 
-    // Suivi de la position de la souris
-    const handleMouseMove = (e) => {
+    // Suivi de la position de la souris - optimized with requestAnimationFrame
+    const handleMouseMove = useCallback((e) => {
         if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            setMousePos({
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top
+            requestAnimationFrame(() => {
+                const rect = containerRef.current.getBoundingClientRect();
+                setMousePos({
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                });
             });
         }
-    };
+    }, []);
 
-    // Fonction pour basculer la visibilité d'une section
-    const toggleSection = (section) => {
+    // Fonction pour basculer la visibilité d'une section - memoized
+    const toggleSection = useCallback((section) => {
         setExpandedSections(prev => ({
             ...prev,
             [section]: !prev[section]
         }));
-    };
+    }, []);
 
-    // Gestion des classes dynamiques pour les niveaux
-    const getLevelClasses = (level) => {
+    // Gestion des classes dynamiques pour les niveaux - memoized
+    const getLevelClasses = useCallback((level) => {
         switch (level) {
             case 'Advanced':
                 return 'text-[#DAA520] border-[#DAA520]';
@@ -79,10 +79,10 @@ const Skills = () => {
             default:
                 return 'text-white/50 border-white/30';
         }
-    };
+    }, []);
 
-    // Fonction pour afficher les indicateurs de niveau
-    const getLevelIndicator = (level, compact = false) => {
+    // Fonction pour afficher les indicateurs de niveau - memoized
+    const getLevelIndicator = useCallback((level, compact = false) => {
         const baseClass = "inline-block w-2 h-2 rounded-full";
 
         if (compact) {
@@ -102,7 +102,7 @@ const Skills = () => {
                 <span className={`${baseClass} ${level === 'Advanced' ? 'bg-current' : 'bg-white/20'}`}></span>
             </div>
         );
-    };
+    }, []);
 
     return (
         <section

@@ -43,5 +43,17 @@ export default defineConfig({
     minifyIdentifiers: true,
     minifySyntax: true,
     minifyWhitespace: true
+  },
+  // Image optimization
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.webp', '**/*.svg'],
+  // Performance optimizations for agent navigation
+  server: {
+    warmup: {
+      clientFiles: [
+        './src/main.jsx',
+        './src/App.jsx',
+        './src/pages/Home.jsx'
+      ]
+    }
   }
 })
